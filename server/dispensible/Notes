@@ -1,0 +1,8 @@
+Add Comments to ProductModel
+
+comments: {
+    type(objectId.mongoose)
+    type: String,
+},
+
+npm install multer
