@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './GameScreen.css';
 
 
-function GameScreen({ heroLives, monsterLives, attackAnimation, isMonsterAttacking  }) {
+function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking  }) {
   const [animation, setAnimation] = useState(null)
 
   useEffect(() => {
@@ -14,6 +14,15 @@ function GameScreen({ heroLives, monsterLives, attackAnimation, isMonsterAttacki
     }
   }, [isMonsterAttacking]);
 
+
+  useEffect(() => {
+    if (isAttacking) {
+      setAnimation('hero');
+      const timer = setTimeout(() => setAnimation(null), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isAttacking]);
+
   return (
     <div className="border border-gray-300 p-4 mb-4 flex justify-between">
       <div>Hero: {heroLives} lives</div>
@@ -21,7 +30,7 @@ function GameScreen({ heroLives, monsterLives, attackAnimation, isMonsterAttacki
         {/* Monster Animation (conditional) */}
         {animation === 'hero' && (
           <div className="animate-attack">
-            <img src="/hero-attack.gif" alt="Hero Attack" className="h-20 w-20" />
+            <img src="/img/hero-attack.gif" alt="Hero Attack" className="h-20 w-20" />
           </div>
         )}
         {animation === 'monster' && (
