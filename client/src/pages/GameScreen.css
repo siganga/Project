@@ -1,0 +1,15 @@
+.animate-attack {
+  animation: attack 0.5s ease-in-out; /* Adjust duration as needed */
+}
+
+@keyframes attack {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(50px); /* Adjust distance as needed */
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

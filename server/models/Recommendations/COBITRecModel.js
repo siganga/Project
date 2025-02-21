@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-// Create an order schema
+
 const cobitRecSchema = new mongoose.Schema({
 
    num: {
@@ -10,14 +10,33 @@ const cobitRecSchema = new mongoose.Schema({
       //required: true
     },
 
-  rec: {
+  rec: { //Recommendation
       type: String,
       required: true,
     },
+
+
+    scen: {  //Scenario
+      type: String,
+      required: true,
+    },
+   
+   imp: { //impact
+      type: Number,
+      required: true,
+      //required: true
+    },
+
+    lik: {//likelihood
+      type: Number,
+      required: true,
+      //required: true
+    },
+
 
    
   
 });
 
 
-module.exports = mongoose.model('CobitRecOne',cobitRecSchema);
+module.exports = mongoose.model('CobitRecThree',cobitRecSchema);

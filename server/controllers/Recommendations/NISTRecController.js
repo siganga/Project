@@ -1,4 +1,4 @@
-const COBITRec = require('../../models/Recommendations/COBITRecModel.js')
+const NISTRec = require('../../models/Recommendations/NISTRecModel.js')
 const mongoose = require('mongoose')
 
 
@@ -6,13 +6,23 @@ const mongoose = require('mongoose')
 
 
 
+const deleteAllRecommendations = async (req, res) => {
+  try {
+    await NISTRec.deleteMany({}); // Delete all documents in the ISORec collection
+    res.status(200).json({ message: 'All recommendations deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting recommendations:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 
 const createRecommendation = async (req, res) => {
   const { num, rec, scen, imp, lik } = req.body;
   try {
-    const cobitRec = await COBITRec.create({num, rec, scen, imp, lik });
-    res.status(200).json(cobitRec);
+    const nistRec = await NISTRec.create({num, rec, scen, imp, lik });
+    res.status(200).json(nistRec);
   } catch (error) {
     res.json({ error: error.message });
   }
@@ -24,8 +34,8 @@ const createRecommendation = async (req, res) => {
 //get all recommendations
 const getRecommendations  = async (req, res) => {
     try{
-        const cobitRec = await COBITRec.find({})//.sort({createdAt:-1})  sort number
-        res.status(200).json(cobitRec)
+        const nistRec = await NISTRec.find({}) 
+        res.status(200).json(nistRec)
     }catch(error){
         res.json({error: error.message})
     }
@@ -40,14 +50,14 @@ const getRecResults =async (req, res) => {
         let recommendations = [];
         
         // Get all recommendations
-        const allRecs = await COBITRec.find({});
+        const allRecs = await NISTRec.find({});
        
 
 
 
 // Filter recommendations based on answers
    
-        if (quest.ans1 && quest.ans1.toLowerCase() === 'no') {
+       if (quest.ans1 && quest.ans1.toLowerCase() === 'no') {
         const matchingRec = allRecs.find(rec => rec.num ===  1);
         if (matchingRec) {
           recommendations.push(matchingRec);
@@ -130,7 +140,7 @@ const getRecResults =async (req, res) => {
 }
 
 
-
+    
 
 
       
@@ -151,5 +161,25 @@ const getRecResults =async (req, res) => {
 
 
 
+/*
 
-module.exports = {createRecommendation,  getRecommendations, getRecResults }
+
+
+
+  const getProductReviews = async (req, res) => {
+    const productId = req.params.productId;
+    try {
+      const product = await Product.findById(productId);
+      if (!product) {
+        res.status(404).json({ error: 'Product not found' });
+        return;
+      }
+      res.json({ reviews: product.reviews });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+
+*/
+
+module.exports = {createRecommendation,  getRecommendations, getRecResults, deleteAllRecommendations }

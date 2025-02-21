@@ -1,4 +1,4 @@
-const COBITRec = require('../../models/Recommendations/COBITRecModel.js')
+const ISORec = require('../../models/Recommendations/ISORecModel.js')
 const mongoose = require('mongoose')
 
 
@@ -11,8 +11,8 @@ const mongoose = require('mongoose')
 const createRecommendation = async (req, res) => {
   const { num, rec, scen, imp, lik } = req.body;
   try {
-    const cobitRec = await COBITRec.create({num, rec, scen, imp, lik });
-    res.status(200).json(cobitRec);
+    const isoRec = await ISORec.create({num, rec, scen, imp, lik });
+    res.status(200).json(isoRec);
   } catch (error) {
     res.json({ error: error.message });
   }
@@ -20,12 +20,11 @@ const createRecommendation = async (req, res) => {
 
 
 
-
 //get all recommendations
 const getRecommendations  = async (req, res) => {
     try{
-        const cobitRec = await COBITRec.find({})//.sort({createdAt:-1})  sort number
-        res.status(200).json(cobitRec)
+        const isoRec = await ISORec.find({})//.sort({createdAt:-1})  sort number
+        res.status(200).json(isoRec)
     }catch(error){
         res.json({error: error.message})
     }
@@ -36,18 +35,18 @@ const getRecommendations  = async (req, res) => {
 //get recommendations based on answers given
 const getRecResults =async (req, res) => {
   try {
-        const {quest, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10} = req.body;
+        const {quest, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10, quest11, quest12, quest13, quest14, quest15, quest16, quest17, quest18, quest19, quest20,  quest21,  quest22} = req.body;
         let recommendations = [];
         
         // Get all recommendations
-        const allRecs = await COBITRec.find({});
+        const allRecs = await ISORec.find({});
        
 
 
 
 // Filter recommendations based on answers
    
-        if (quest.ans1 && quest.ans1.toLowerCase() === 'no') {
+      if (quest.ans1 && quest.ans1.toLowerCase() === 'no') {
         const matchingRec = allRecs.find(rec => rec.num ===  1);
         if (matchingRec) {
           recommendations.push(matchingRec);
@@ -130,7 +129,12 @@ const getRecResults =async (req, res) => {
 }
 
 
+     
 
+
+
+
+     
 
 
       
@@ -151,5 +155,25 @@ const getRecResults =async (req, res) => {
 
 
 
+/*
+
+
+
+
+  const getProductReviews = async (req, res) => {
+    const productId = req.params.productId;
+    try {
+      const product = await Product.findById(productId);
+      if (!product) {
+        res.status(404).json({ error: 'Product not found' });
+        return;
+      }
+      res.json({ reviews: product.reviews });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+
+*/
 
 module.exports = {createRecommendation,  getRecommendations, getRecResults }

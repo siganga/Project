@@ -1,14 +1,17 @@
 const  express = require('express');
 
 /* Routes */
-//const workoutRoutes = require('./routes/Workouts.js')
-const userRoutes = require('./routes/userRoutes.js')
-const productRoutes = require('./routes/productRoutes.js')
-const orderRoutes  = require('./routes/orderRoutes.js')
-
 
 //Recommendation routes
 const COBITRecRoutes  = require('./routes/Recommendations/COBITRecRoutes.js')
+const ISORecRoutes  = require('./routes/Recommendations/ISORecRoutes.js')
+const NISTRecRoutes  = require('./routes/Recommendations/NISTRecRoutes.js')
+
+//The routes
+const UnitRoutes  = require('./routes/CRUD/UnitRoutes.js')
+const LessonRoutes  = require('./routes/CRUD/LessonRoutes.js')
+const QuestionRoutes  = require('./routes/CRUD/QuestionRoutes.js')
+
 
 /* Imports*/
 const mongoose = require('mongoose')
@@ -26,27 +29,20 @@ app.use(cors({
    }));
 app.use(express.json())
 
-app.use('/uploads', express.static('uploads'));
 
-
-app.get('/api/images/:id', async (req, res) => {
-    const { id } = req.params;
-    const product = await Product.findById(id);
-    if (!product || !product.image) {
-      return res.status(404).send('Image not found');
-    }
-    res.set('Content-Type', product.image.contentType);
-    res.send(product.image.data);
-  });
 
 
 /*Route setup */
-//app.use('/api/workouts', workoutRoutes)
-app.use('/api/user', userRoutes)
-app.use('/api/orders', orderRoutes)
-app.use('/api/products', productRoutes)
 
 app.use('/api/cobitRec', COBITRecRoutes)
+app.use('/api/isoRec', ISORecRoutes)
+app.use('/api/nistRec', NISTRecRoutes)
+
+
+/*Route setup*/
+app.use('/api/units', UnitRoutes)
+app.use('/api/lessons', LessonRoutes)
+app.use('/api/questions', QuestionRoutes)
 
 
 const uri = "mongodb+srv://itachi:abcd1234@mernapp.cdmbs.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp";
