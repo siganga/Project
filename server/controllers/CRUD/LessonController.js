@@ -1,5 +1,6 @@
 const Unit = require('../../models/CRUD/UnitModel.js')
 const Lesson = require('../../models/CRUD/LessonModel.js')
+const Question = require('../../models/CRUD/QuestionModel.js')
 const mongoose = require('mongoose')
 
 
@@ -42,8 +43,8 @@ const createLesson  = async (req, res) => {
 const deleteLesson  = async (req, res) => {
   try {
     await Lesson.findByIdAndDelete(req.params.id);
-    // Delete associated questions (optional)
-    // await Question.deleteMany({ lesson: req.params.id }); // If you have a 'lesson' field in Question model
+    // Delete associated questions 
+     await Question.deleteMany({ lesson: req.params.id }); 
     res.json({ message: 'Lesson deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });

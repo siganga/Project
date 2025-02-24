@@ -1,13 +1,76 @@
-.animate-attack {
-  animation: attack 0.5s ease-in-out; /* Adjust duration as needed */
+/* GameScreen.css */
+.game-screen {
+  display: flex;
+  justify-content: space-around; /* Distribute space evenly */
+  align-items: center; /* Vertically align items */
+  padding: 20px; /* Add some padding */
+  border: 1px solid gray; /* Optional border */
+  margin-bottom: 20px; /* Add margin */
+  position: relative; /* Needed for absolute positioning of life displays */
 }
+
+
+.life-display {
+  position: absolute; /* Position the life displays */
+  font-size: 20px; /* Adjust font size as needed */
+  padding: 5px 10px; /* Add some padding */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+.top-left {
+  top: 20px; /* Adjust top position as needed */
+  left: 20px; /* Adjust left position as needed */
+}
+
+.top-right {
+  top: 20px; /* Adjust top position as needed */
+  right: 20px; /* Adjust right position as needed */
+}
+
+
+
+
+.character-container {
+  display: flex; /* Use flexbox for character content */
+  flex-direction: column; /* Stack lives and image vertically */
+  align-items: center;  /* Center the content */
+}
+
+.character-image {
+  height: 100px; /* Adjust as needed */
+  width: 100px; /* Adjust as needed */
+  margin-top: 10px; /* Space between lives and image */
+}
+
+
+/* New: Flip the monster image horizontally */
+.monster-image {
+  transform: scaleX(-1); /* Flips the image horizontally */
+}
+
+.animate-attack {
+  animation: attack 0.5s ease-in-out;
+  position: absolute; /* Needed for proper animation positioning */
+  /* You might need to adjust top/left/right properties here depending on your image sizes and layout */
+  /* Example: */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+}
+
+.life-display { /* Style for the life display */
+  margin-bottom: 10px; /* Space between lives and image */
+}
+
+
 
 @keyframes attack {
   0% {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(50px); /* Adjust distance as needed */
+    transform: translateX(20px); /* Adjust distance as needed */
   }
   100% {
     transform: translateX(0);

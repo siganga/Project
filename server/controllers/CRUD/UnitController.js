@@ -1,4 +1,5 @@
 const Unit = require('../../models/CRUD/UnitModel.js')
+const Question = require('../../models/CRUD/QuestionModel.js')
 const Lesson = require('../../models/CRUD/LessonModel.js')
 const mongoose = require('mongoose')
 
@@ -31,16 +32,31 @@ const createUnit  = async (req, res) => {
 
 // Delete a unit
 
-const deleteUnit  = async (req, res) => {
-  try {
-    await Unit.findByIdAndDelete(req.params.id);
-    // Delete associated lessons (optional, but good practice)
-    await Lesson.deleteMany({ unit: req.params.id }); // If you have a 'unit' field in Lesson model
-    res.json({ message: 'Unit deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+const deleteUnit = async (req, res) => {
+    try {
+        const unitId = req.params.id;
+
+        // Find all lessons associated with the unit
+        const lessonsToDelete = await Lesson.find({ unit: unitId });
+
+        // Extract lesson IDs
+        const lessonIdsToDelete = lessonsToDelete.map(lesson => lesson._id);
+
+        // Delete questions associated with the lessons
+        await Question.deleteMany({ lesson: { $in: lessonIdsToDelete } });
+
+        // Delete the lessons
+        await Lesson.deleteMany({ unit: unitId });
+
+        // Delete the unit
+        await Unit.findByIdAndDelete(unitId);
+
+        res.json({ message: 'Unit and associated lessons and questions deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 };
+
 
 
 
