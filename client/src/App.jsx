@@ -30,6 +30,10 @@ import AddLesson from "./pages/AddLesson"
 
 import AddQuestion from "./pages/AddQuestion"
 
+//
+
+import UnitPage from "./pages/UnitPage";
+
 
 /*
 import UnitAdd from "./pages/CRUD/UnitAdd";
@@ -103,6 +107,10 @@ function App() {
        <Route path="/add-lesson/:unitId" element={<AddLesson />} /> 
 				
 				<Route path="/add-question/:lessonId" element={<AddQuestion />} />
+
+
+				<Route path='/units' element={<UnitPage />} />
+				
 				 
 
 			</Routes>

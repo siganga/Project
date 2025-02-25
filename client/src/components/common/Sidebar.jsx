@@ -24,7 +24,7 @@ const SIDEBAR_ITEMS = [
 	
 	{ name: "Graphic Analysis", icon: BarChart2, color: "#3B82F6", href: "/analytics" },
 
-	{ name: "Units", icon: Wrench, color: "#10B981", href: "/tools" },
+	{ name: "Units", icon: Wrench, color: "#10B981", href: "/units" },
 	
 	{ name: "Recommendations", icon: Lightbulb, color: "#6EE7B7", href: "/QUESTResults" },
 	
