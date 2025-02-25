@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const ClassroomPage = () => {
+const AddClassroom = () => {
     const [classrooms, setClassrooms] = useState([]);
     const [newClassroomTitle, setNewClassroomTitle] = useState('');
 
@@ -39,7 +39,7 @@ const ClassroomPage = () => {
                     <li key={classroom._id}>
                         {classroom.title}
                         <button onClick={() => handleDeleteClassroom(classroom._id)}>Delete</button>
-                        <Link to={`/unit/${classroom._id}`}> <button>Add Unit</button></Link>
+                        <Link to={`/add-unit/${classroom._id}`}> <button>Add Unit</button></Link>
                     </li>
                 ))}
             </ul>
@@ -47,4 +47,4 @@ const ClassroomPage = () => {
     );
 };
 
-export default ClassroomPage;
+export default AddClassroom;

@@ -26,15 +26,23 @@ import NISTList from "./pages/Questionnaires/Addition/NISTList";
 import QUESTResults from "./pages/Questionnaires/Results/QUESTResults";
 
 
-import AddLesson from "./pages/AddLesson"
+import AddLesson from "./pages/CRUD/AddLesson"
+import AddQuestion from "./pages/CRUD/AddQuestion"
+import AddUnit from "./pages/CRUD/AddUnit"
+import AddClassroom from "./pages/CRUD/AddClassroom"
 
-import AddQuestion from "./pages/AddQuestion"
+
+
+
 
 //
 
 import UnitPage from "./pages/UnitPage";
 import ClassroomPage from "./pages/ClassroomPage";
 import AnswerQuestions from "./pages/AnswerQuestions";
+
+import LessonPage from "./pages/LessonPage";
+
 
 
 
@@ -107,17 +115,25 @@ function App() {
 				
 				<Route path='/QUESTResults' element={<QUESTResults/>} />
 
-       <Route path="/add-lesson/:unitId" element={<AddLesson />} /> 
+
+				<Route path='/add-unit/:classroomId' element={<AddUnit />} />
+        <Route path="/add-lesson/:unitId" element={<AddLesson />} /> 
+			  <Route path="/add-question/:lessonId" element={<AddQuestion />} />
+			  <Route path="/add-classrooms" element={<AddClassroom  />} />
+
+
+
 				
-				<Route path="/add-question/:lessonId" element={<AddQuestion />} />
-				<Route path="/ans-questions/:lessonId" element={<AnswerQuestions />} />
 
                            
 
-				<Route path='/add-unit/:classroomId' element={<UnitPage />} />
+				<Route path='/unit/:classroomId' element={<UnitPage />} />
+				<Route path="/lesson/:unitId" element={<LessonPage/>} /> 
 				<Route path="/classrooms" element={<ClassroomPage />} />
+				<Route path="/ans-questions/:lessonId" element={<AnswerQuestions />} />
 				
-				 
+
+
 
 			</Routes>
 				 </PersistGate>

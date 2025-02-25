@@ -1,133 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import GameScreen from '../GameScreen';
+import { motion } from "framer-motion";
+//import UnitsPage from "./UnitsPage";
+//<UnitsPage />
 
-function AddQuestion() {
-  const { lessonId } = useParams();
-  const navigate = useNavigate();
+//import UnitAdd from "./CRUD/UnitAdd";         <UnitAdd />
+
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+
+
+
+
+
+
+const AddQuestion = () => {
+
+   const { lessonId } = useParams();
   const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [submitted, setSubmitted] = useState(false); // New state for submission
-  const [correct, setCorrect] = useState(null); // New state for correctness
-  const [lessonTitle, setLessonTitle] = useState('');
-  const [heroLives, setHeroLives] = useState(3);
-  const [monsterLives, setMonsterLives] = useState(3);
-  const [isAttacking, setIsAttacking] = useState(false);
-  const [isMonsterAttacking, setIsMonsterAttacking] = useState(false);
+  const [newQuestionText, setNewQuestionText] = useState('');
+  const [newQuestionAnswer, setNewQuestionAnswer] = useState('');
+  const [lessonTitle, setLessonTitle] = useState(''); // Store lesson title
 
   useEffect(() => {
+    // Fetch questions for the lesson
     fetch(`http://localhost:5000/api/questions/lesson/${lessonId}`)
       .then(res => res.json())
       .then(data => setQuestions(data));
 
-    fetch(`http://localhost:5000/api/lessons/${lessonId}`)
+    // Fetch the lesson title (for display)
+    fetch(`http://localhost:5000/api/lessons/${lessonId}`) // Assuming you have this route on your backend
       .then(res => res.json())
       .then(lessonData => setLessonTitle(lessonData.title));
   }, [lessonId]);
 
-   const handleAttackAnimation = async (isCorrect) => {
-    if (isCorrect) {
-      setIsAttacking(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setIsAttacking(false);
-      setMonsterLives(prev => prev - 1);
-    } else {
-      setIsMonsterAttacking(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setIsMonsterAttacking(false);
-      setHeroLives(prev => prev - 1);
-    }
-  };
- 
-
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setUserAnswer('');
-      setSubmitted(false); // Reset submitted state
-      setCorrect(null)
-    } else {
-      alert("You have reached the end of the questions");
-      navigate(`/lesson/${lessonId}`);
-    }
+  const handleAddQuestion = () => {
+    fetch('http://localhost:5000/api/questions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text: newQuestionText,
+        answer: newQuestionAnswer,
+        lessonId
+      })
+    })
+      .then(res => res.json())
+      .then(newQuestion => setQuestions([...questions, newQuestion]));
+        setNewQuestionText("")
+        setNewQuestionAnswer("")
   };
 
-  const handleSubmit = async () => {
-    setSubmitted(true);
-    const currentQuestion = questions[currentQuestionIndex];
-    const isCorrect = userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase();
-    setCorrect(isCorrect);
-    await handleAttackAnimation(isCorrect);
-
-    if (monsterLives <= 1 && isCorrect) {
-      alert("Congratulations! You've defeated the monster!");
-      navigate(`/lesson/${lessonId}`);
-    }
-    if (heroLives <= 1 && !isCorrect) {
-      alert("Game Over! The monster has defeated you!");
-      navigate(`/lesson/${lessonId}`);
-      
-    }
+  const handleDeleteQuestion = (id) => {
+    fetch(`http://localhost:5000/api/questions/${id}`, { method: 'DELETE' })
+      .then(() => setQuestions(questions.filter(question => question._id !== id)));
   };
 
 
-  if (questions.length === 0) {
-    return <div>Loading questions...</div>;
-  }
-
-  const currentQuestion = questions[currentQuestionIndex];
-
-
-  const handleGameOver = () => {
-      alert("Game Over")
-      navigate(`/lesson/${lessonId}`);
-  }
 
   return (
-    <div className='flex-1 overflow-auto relative z-10'> {/* Tailwind container */}
+    <div className='flex-1 overflow-auto relative z-10'>
+      
 
-     <GameScreen 
-        heroLives={heroLives} 
-        monsterLives={monsterLives} 
-        isAttacking={isAttacking} 
-        isMonsterAttacking={isMonsterAttacking} 
-      /> 
+      
+        <p> Add Question Page  </p>
 
-      <h1 className="text-2xl font-bold mb-4">{lessonTitle} - Question {currentQuestionIndex + 1} of {questions.length}</h1>
-      <p className="mb-2">{currentQuestion.text}</p>
+        <h1>{lessonTitle} - Add Question</h1> {/* Display lesson title */}
       <input
         type="text"
-        value={userAnswer}
-        onChange={e => setUserAnswer(e.target.value)}
-        placeholder="Your Answer"
-        className="border border-gray-300 rounded px-3 py-2 mb-2 w-full" // Tailwind input styling
+        value={newQuestionText}
+        onChange={e => setNewQuestionText(e.target.value)}
+        placeholder="Question Text"
       />
-      <button
-        onClick={handleSubmit}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" // Tailwind button styling
-      >
-        Submit
-      </button>
-      <button
-        onClick={handleNextQuestion}
-        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" // Tailwind button styling
-        disabled = {!submitted}
-      >
-        Next Question
-      </button>
+      <input
+        type="text"
+        value={newQuestionAnswer}
+        onChange={e => setNewQuestionAnswer(e.target.value)}
+        placeholder="Question Answer"
+      />
+      <button onClick={handleAddQuestion}>Add Question</button>
 
-      {submitted && ( // Conditionally render the answer and highlight
-        <p
-          className={`mt-2 ${
-            correct ? 'text-green-500 bg-green-100 p-2 rounded' : 'text-red-500 bg-red-100 p-2 rounded'
-          }`} // Tailwind conditional styling
-        >
-          Your Answer: {userAnswer}
-        </p>
-      )}
+      <h2>Questions</h2>
+      <ul>
+        {questions.map(question => (
+          <li key={question._id}>
+            {question.text} - {question.answer}
+            <button onClick={() => handleDeleteQuestion(question._id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+      <Link to={`/add-lesson/${questions[0]?.lesson}`}> {/* Go back to the correct lesson */}
+        <button>Back to Lessons</button>
+      </Link>
+       
+        
+
     </div>
   );
-}
-
+};
 export default AddQuestion;
