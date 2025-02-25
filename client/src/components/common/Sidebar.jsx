@@ -26,7 +26,7 @@ const SIDEBAR_ITEMS = [
 
 	{ name: "Units", icon: Wrench, color: "#10B981", href: "/units" },
 	
-	{ name: "Recommendations", icon: Lightbulb, color: "#6EE7B7", href: "/QUESTResults" },
+	{ name: "Classrooms", icon: Lightbulb, color: "#6EE7B7", href: "/classrooms" },
 	
 	
 	{ name: "Go Back Home", icon: Home, color: "#6EE7B7", href: "/" },   

@@ -33,6 +33,8 @@ import AddQuestion from "./pages/AddQuestion"
 //
 
 import UnitPage from "./pages/UnitPage";
+import ClassroomPage from "./pages/ClassroomPage";
+
 
 
 /*
@@ -109,7 +111,8 @@ function App() {
 				<Route path="/add-question/:lessonId" element={<AddQuestion />} />
 
 
-				<Route path='/units' element={<UnitPage />} />
+				<Route path='/add-unit/:classroomId' element={<UnitPage />} />
+				<Route path="/classrooms" element={<ClassroomPage />} />
 				
 				 
 

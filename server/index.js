@@ -11,6 +11,7 @@ const NISTRecRoutes  = require('./routes/Recommendations/NISTRecRoutes.js')
 const UnitRoutes  = require('./routes/CRUD/UnitRoutes.js')
 const LessonRoutes  = require('./routes/CRUD/LessonRoutes.js')
 const QuestionRoutes  = require('./routes/CRUD/QuestionRoutes.js')
+const ClassroomRoutes  = require('./routes/CRUD/ClassroomRoutes.js')
 
 
 /* Imports*/
@@ -43,6 +44,9 @@ app.use('/api/nistRec', NISTRecRoutes)
 app.use('/api/units', UnitRoutes)
 app.use('/api/lessons', LessonRoutes)
 app.use('/api/questions', QuestionRoutes)
+app.use('/api/classrooms', ClassroomRoutes)
+
+ 
 
 
 const uri = "mongodb+srv://itachi:abcd1234@mernapp.cdmbs.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp";
