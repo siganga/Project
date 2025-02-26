@@ -77,7 +77,7 @@ const shareClassroom = async (req, res) => {
         }
 
          const userId = req.query.userId;
-        
+
         if (classroom.owner.toString() !== userId) {
             return res.status(403).json({ message: 'Forbidden' }); // Only the owner can share
         }
@@ -97,4 +97,27 @@ const shareClassroom = async (req, res) => {
     }
 };
 
-module.exports = { getClassrooms, createClassroom, deleteClassroom, getSingleClassroom, shareClassroom };
+
+
+const getSharedUsers = async (req, res) => {
+    try {
+        const classroomId = req.params.id;
+        const userId = req.query.userId;
+
+        const classroom = await Classroom.findById(classroomId).populate('sharedWith', 'email _id'); // Populate sharedWith
+
+        if (!classroom) {
+            return res.status(404).json({ message: 'Classroom not found' });
+        }
+
+        if (classroom.owner.toString() !== userId) {
+            return res.status(403).json({ message: 'Forbidden' });
+        }
+
+        res.json(classroom.sharedWith);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+module.exports = { getClassrooms, createClassroom, deleteClassroom, getSingleClassroom, shareClassroom, getSharedUsers };
