@@ -42,7 +42,7 @@ const UnitPage = () => {
                     <li key={unit._id}>
                         {unit.title}
                         <button onClick={() => handleDeleteUnit(unit._id)}>Delete</button>
-                        <Link to={`/add-lesson/${unit._id}`}> <button>Add Lesson</button></Link>
+                        <Link to={`/lesson/${unit._id}`}> <button>Add Lesson</button></Link>
                     </li>
                 ))}
             </ul>

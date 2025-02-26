@@ -75,7 +75,7 @@ const ClassroomPage = () => {
                         <li key={classroom._id}>
                             {classroom.title}
                             <button onClick={() => handleDeleteClassroom(classroom._id)}>Delete</button>
-                            <Link to={`/add-unit/${classroom._id}`}> <button>Add Unit</button></Link>
+                            <Link to={`/unit/${classroom._id}`}> <button>Add Unit</button></Link>
                             <Link to={`/classrooms/${classroom._id}/share`}> <button>Share</button> </Link>
                         </li>
                     ))}
