@@ -1,52 +1,88 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Header from "../components/common/Header";
+import { useSelector } from 'react-redux';
+
 
 const ClassroomPage = () => {
     const [classrooms, setClassrooms] = useState([]);
     const [newClassroomTitle, setNewClassroomTitle] = useState('');
 
+
+
+     const user = useSelector((state) => state.auth.user) || "";
+     const userId = user ? user.userId: null;
+
     useEffect(() => {
-        fetch('http://localhost:5000/api/classrooms') // Fetch classrooms
+        if (userId) { // Only fetch if userId is available
+            fetch(`http://localhost:5000/api/classrooms?userId=${userId}`, { // Send userId as a query parameter
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             .then(res => res.json())
             .then(data => setClassrooms(data));
-    }, []);
+        }
+    }, [userId]); 
 
     const handleAddClassroom = () => {
-        fetch('http://localhost:5000/api/classrooms', { // Create a new classroom
+        if (!userId) {
+            console.error("User ID not available.");
+            return;
+        }
+
+        fetch(`http://localhost:5000/api/classrooms?userId=${userId}`, { // Include userId in the URL
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
             body: JSON.stringify({ title: newClassroomTitle })
         })
-            .then(res => res.json())
-            .then(newClassroom => setClassrooms([...classrooms, newClassroom]));
+        .then(res => res.json())
+        .then(newClassroom => setClassrooms([...classrooms, newClassroom]));
+
+        setNewClassroomTitle('')
     };
 
-    const handleDeleteClassroom = (id) => {
-        fetch(`http://localhost:5000/api/classrooms/${id}`, { method: 'DELETE' }) // Delete a classroom
-            .then(() => setClassrooms(classrooms.filter(classroom => classroom._id !== id)));
-    };
+   const handleDeleteClassroom = (id) => {
+        if (!userId) {
+            console.error("User ID not available.");
+            return;
+        }
 
-    //<Header title='Classrooms Page' />
+        fetch(`http://localhost:5000/api/classrooms/${id}?userId=${userId}`, { // Include userId in the URL
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(() => setClassrooms(classrooms.filter(classroom => classroom._id !== id)));
+    };
 
     return (
         <div className='flex-1 overflow-auto relative z-10'>
-            <Header  />
+        <div> {userId} </div>
             <p>Classrooms Page</p>
 
             <input type="text" value={newClassroomTitle} onChange={e => setNewClassroomTitle(e.target.value)} />
             <button onClick={handleAddClassroom}>Add Classroom</button>
 
+
             <h2>Classrooms</h2>
-            <ul>
-                {classrooms.map(classroom => (
-                    <li key={classroom._id}>
-                        {classroom.title}
-                        <button onClick={() => handleDeleteClassroom(classroom._id)}>Delete</button>
-                        <Link to={`/unit/${classroom._id}`}> <button>Add Unit</button></Link>
-                    </li>
-                ))}
-            </ul>
+            {classrooms.length > 0 ? ( // Check if classrooms array is not empty
+                <ul>
+                    {classrooms.map(classroom => (
+                        <li key={classroom._id}>
+                            {classroom.title}
+                            <button onClick={() => handleDeleteClassroom(classroom._id)}>Delete</button>
+                            <Link to={`/add-unit/${classroom._id}`}> <button>Add Unit</button></Link>
+                            <Link to={`/classrooms/${classroom._id}/share`}> <button>Share</button> </Link>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No classrooms available.</p> // Render this if classrooms array is empty
+            )}
         </div>
     );
 };

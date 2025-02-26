@@ -47,6 +47,7 @@ import LessonPage from "./pages/LessonPage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
+import ShareClassroomPage from './pages/ShareClassroomPage';
 
 
 
@@ -144,7 +145,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
 
 
-
+        <Route path="/classrooms/:id/share" element={<ShareClassroomPage />} />
 
 
 				

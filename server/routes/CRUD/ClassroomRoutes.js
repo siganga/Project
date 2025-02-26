@@ -1,7 +1,7 @@
 
 
 const  express = require('express');
-const {  getClassrooms, createClassroom, deleteClassroom, getSingleClassroom} = require('../../controllers/CRUD/ClassroomController.js')
+const { getClassrooms, createClassroom, deleteClassroom, getSingleClassroom, shareClassroom } = require('../../controllers/CRUD/ClassroomController.js')
 
 
   																						
@@ -18,7 +18,7 @@ router.delete('/:id',  deleteClassroom);
 
 router.get('/:id', getSingleClassroom);
 
-
+router.post('/:id/share', shareClassroom);
 
 
 module.exports = router

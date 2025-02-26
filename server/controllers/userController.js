@@ -16,7 +16,7 @@ const   loginUser =  async (req, res) => {
         const user = await UserThree.login(email, password);
 
         const token = createToken(user._id)
-        res.status(200).json({ email, token, userId: user._id, role: user.role });
+        res.status(200).json({ email, token, userId: user._id, role: user.role, name: user.name });
 
     }catch(error){
         res.json({error: error.message})

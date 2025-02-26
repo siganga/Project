@@ -22,7 +22,7 @@ const SIDEBAR_ITEMS = [
 	
 
 	
-	{ name: "Login Page", icon: BarChart2, color: "#3B82F6", href: "/login" },
+	{ name: "Profile Page", icon: BarChart2, color: "#3B82F6", href: "/profile" },
 
 	{ name: "Add Classrooms", icon: Wrench, color: "#10B981", href: "/add-classrooms" },
 	

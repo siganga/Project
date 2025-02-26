@@ -12,7 +12,9 @@ const ProfilePage = () => {
   const userLogged = user ? true : false;
   var userAdmin = false
   var userAuth = false
- 
+
+   const userId = user ? user.userId: null;
+
  // console.log(userEmail);
 
   if(user.role === 'student'){//admin, user
@@ -53,6 +55,7 @@ const ProfilePage = () => {
         <li>
           <div>{userEmail}</div>
            <div>{userName}</div>
+           <div> {userId} </div>
         </li>
 
         <li>
