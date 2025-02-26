@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from "../../components/common/Header";
 
 const AddClassroom = () => {
     const [classrooms, setClassrooms] = useState([]);
@@ -28,6 +29,7 @@ const AddClassroom = () => {
 
     return (
         <div className='flex-1 overflow-auto relative z-10'>
+        <Header title=' Add Classrooms Page' />
             <p>Classrooms Page</p>
 
             <input type="text" value={newClassroomTitle} onChange={e => setNewClassroomTitle(e.target.value)} />

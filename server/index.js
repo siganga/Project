@@ -12,6 +12,7 @@ const UnitRoutes  = require('./routes/CRUD/UnitRoutes.js')
 const LessonRoutes  = require('./routes/CRUD/LessonRoutes.js')
 const QuestionRoutes  = require('./routes/CRUD/QuestionRoutes.js')
 const ClassroomRoutes  = require('./routes/CRUD/ClassroomRoutes.js')
+const userRoutes = require('./routes/userRoutes.js')
 
 
 /* Imports*/
@@ -45,6 +46,7 @@ app.use('/api/units', UnitRoutes)
 app.use('/api/lessons', LessonRoutes)
 app.use('/api/questions', QuestionRoutes)
 app.use('/api/classrooms', ClassroomRoutes)
+app.use('/api/user', userRoutes)
 
  
 

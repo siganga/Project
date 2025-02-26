@@ -40,8 +40,13 @@ import AddClassroom from "./pages/CRUD/AddClassroom"
 import UnitPage from "./pages/UnitPage";
 import ClassroomPage from "./pages/ClassroomPage";
 import AnswerQuestions from "./pages/AnswerQuestions";
-
 import LessonPage from "./pages/LessonPage";
+
+
+//
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ProfilePage from "./pages/ProfilePage";
 
 
 
@@ -131,6 +136,18 @@ function App() {
 				<Route path="/lesson/:unitId" element={<LessonPage/>} /> 
 				<Route path="/classrooms" element={<ClassroomPage />} />
 				<Route path="/ans-questions/:lessonId" element={<AnswerQuestions />} />
+
+
+
+				<Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<ProfilePage />} />
+
+
+
+
+
+				
 				
 
 
