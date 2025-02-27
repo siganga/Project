@@ -65,6 +65,7 @@
 
 
 
+
 @keyframes attack {
   0% {
     transform: translateX(0);
@@ -74,5 +75,25 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+
+
+
+.animate-hurt {
+  animation: hurt 0.5s ease-in-out;
+  position: absolute;
+}
+
+@keyframes hurt {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Slightly enlarge the image */
+  }
+  100% {
+    transform: scale(1);
   }
 }

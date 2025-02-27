@@ -73,12 +73,14 @@ const LessonPage = () => {
             <Link to={`/add-question/${lesson._id}`}>
               <button>Add Question</button>
             </Link>
-            <Link to={`/ans-questions/${lesson._id}`}>
-              <button>Answer Questions</button>
-            </Link>
             <Link to={`/scores/${lesson._id}`}>
               <button>Scores</button>
             </Link>
+            
+            <Link to={`/ans-questions/${lesson._id}`}>
+              <button>Answer Questions</button>
+            </Link>
+            
           </li>
         ))}
       </ul>
