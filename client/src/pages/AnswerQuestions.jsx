@@ -14,7 +14,7 @@ function AnswerQuestions() {
   const [correct, setCorrect] = useState(null);
   const [lessonTitle, setLessonTitle] = useState('');
   const [heroLives, setHeroLives] = useState(3);
-  const [monsterLives, setMonsterLives] = useState(3);
+  const [monsterLives, setMonsterLives] = useState(0);
   const [isAttacking, setIsAttacking] = useState(false);
   const [isMonsterAttacking, setIsMonsterAttacking] = useState(false);
   const [score, setScore] = useState(0);
@@ -24,10 +24,13 @@ function AnswerQuestions() {
   const userId = user ? user.userId : null; // Extract userId
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/questions/lesson/${lessonId}`)
+   fetch(`http://localhost:5000/api/questions/lesson/${lessonId}`)
       .then(res => res.json())
-      .then(data => setQuestions(data));
-
+      .then(data => {
+        setQuestions(data);
+        setMonsterLives(data.length); // Set monster lives to the number of questions
+      });
+      
     fetch(`http://localhost:5000/api/lessons/${lessonId}`)
       .then(res => res.json())
       .then(lessonData => setLessonTitle(lessonData.title));

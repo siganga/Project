@@ -1,11 +1,13 @@
 // GameScreen.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Import useRef
 import './GameScreen.css';
 
 function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }) {
   const [animation, setAnimation] = useState(null);
   const [heroHurt, setHeroHurt] = useState(false);
   const [monsterHurt, setMonsterHurt] = useState(false);
+  const [initialMonsterLives, setInitialMonsterLives] = useState(monsterLives);
+   const monsterHurtRef = useRef(false); //useRef to keep track of the animation status
 
   useEffect(() => {
     if (isMonsterAttacking) {
@@ -24,20 +26,30 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
   }, [isAttacking]);
 
   useEffect(() => {
-    if (heroLives < 3) { // Assuming initial lives is 3
+    if (heroLives < 3) {
       setHeroHurt(true);
       const timer = setTimeout(() => setHeroHurt(false), 500);
       return () => clearTimeout(timer);
     }
   }, [heroLives]);
 
-  useEffect(() => {
-    if (monsterLives < 3) { // Assuming initial lives is 3
+ useEffect(() => {
+    if (monsterLives < initialMonsterLives && !monsterHurtRef.current) { //add check
+      monsterHurtRef.current = true; //set to true to prevent triggering again
       setMonsterHurt(true);
-      const timer = setTimeout(() => setMonsterHurt(false), 500);
+      const timer = setTimeout(() => {
+        setMonsterHurt(false);
+        monsterHurtRef.current = false; //reset
+      }, 500);
       return () => clearTimeout(timer);
     }
-  }, [monsterLives]);
+  }, [monsterLives, initialMonsterLives]);
+
+
+
+  useEffect(() => {
+  setInitialMonsterLives(monsterLives);
+}, []); //run this useEffect only once. //
 
   return (
     <div className="game-screen">
@@ -50,7 +62,7 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
 
       <div className="character-container">
         {animation === 'hero' ? (
-          <div className="animate-attack">
+          <div className="animate-attack hero-attack-position ">
             <img src="/img/hero-attack.gif" alt="Hero Attack" className="character-image" />
           </div>
         ) : heroHurt ? (
@@ -64,7 +76,7 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
 
       <div className="character-container">
         {animation === 'monster' ? (
-          <div className="animate-attack">
+          <div className="animate-attack monster-attack-position">
             <img src="/img/monster-attack.gif" alt="Monster Attack" className="character-image monster-image" />
           </div>
         ) : monsterHurt ? (
