@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GameScreen from './GameScreen';
+import { useSelector } from 'react-redux'; // Import useSelector
 
 function AnswerQuestions() {
   const { lessonId } = useParams();
@@ -17,6 +18,10 @@ function AnswerQuestions() {
   const [isAttacking, setIsAttacking] = useState(false);
   const [isMonsterAttacking, setIsMonsterAttacking] = useState(false);
   const [score, setScore] = useState(0);
+  const [questionAnswered, setQuestionAnswered] = useState(false);
+
+  const user = useSelector((state) => state.auth.user) || ""; // Get user from Redux
+  const userId = user ? user.userId : null; // Extract userId
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/questions/lesson/${lessonId}`)
@@ -42,20 +47,50 @@ function AnswerQuestions() {
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setUserAnswer('');
       setSubmitted(false);
       setCorrect(null);
+      setQuestionAnswered(false);
     } else {
-      alert(`You have reached the end of the questions. Your final score is: ${score}`);
+      // Store the score when the last question is answered
+      if (userId) {
+        try {
+          const response = await fetch('http://localhost:5000/api/scores', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: userId,
+              lessonId: lessonId,
+              score: score,
+            }),
+          });
+          if (response.ok) {
+            alert(`You have reached the end of the questions. Your final score is: ${score}. Score saved!`);
+          } else {
+            alert(`You have reached the end of the questions. Your final score is: ${score}. Failed to save score.`);
+          }
+        } catch (error) {
+          console.error('Error saving score:', error);
+          alert(`You have reached the end of the questions. Your final score is: ${score}. Failed to save score.`);
+        }
+      } else {
+        alert(`You have reached the end of the questions. Your final score is: ${score}. User not logged in. Score not saved.`);
+      }
+
       navigate(`/lesson/${lessonId}`);
     }
   };
 
   const handleSubmit = async () => {
+    if (questionAnswered) return;
+
     setSubmitted(true);
+    setQuestionAnswered(true);
     const currentQuestion = questions[currentQuestionIndex];
     const isCorrect = userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase();
     setCorrect(isCorrect);
@@ -71,7 +106,7 @@ function AnswerQuestions() {
     }
     if (heroLives <= 1 && !isCorrect) {
       alert(`Game Over! The monster has defeated you! Your final score is: ${score}`);
-      navigate(`/lesson/${lessonId}`);
+      navigate(`/`);
     }
   };
 
@@ -97,10 +132,14 @@ function AnswerQuestions() {
         onChange={e => setUserAnswer(e.target.value)}
         placeholder="Your Answer"
         className="border border-gray-300 rounded px-3 py-2 mb-2 w-full"
+        disabled={questionAnswered}
       />
       <button
         onClick={handleSubmit}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+        className={`text-white font-bold py-2 px-4 rounded mr-2 ${
+          questionAnswered ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
+        }`}
+        disabled={questionAnswered}
       >
         Submit
       </button>

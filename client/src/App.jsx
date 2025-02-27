@@ -48,6 +48,8 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
 import ShareClassroomPage from './pages/ShareClassroomPage';
+import ScoresPage from './pages/ScoresPage';
+
 
 
 
@@ -146,6 +148,7 @@ function App() {
 
 
         <Route path="/classrooms/:id/share" element={<ShareClassroomPage />} />
+        <Route path="/scores/:lessonId" element={<ScoresPage />} />
 
 
 				

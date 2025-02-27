@@ -14,6 +14,8 @@ const QuestionRoutes  = require('./routes/CRUD/QuestionRoutes.js')
 const ClassroomRoutes  = require('./routes/CRUD/ClassroomRoutes.js')
 const userRoutes = require('./routes/userRoutes.js')
 
+const scoreRoutes  = require('./routes/Other/scoreRoutes.js')
+
 
 /* Imports*/
 const mongoose = require('mongoose')
@@ -47,7 +49,7 @@ app.use('/api/lessons', LessonRoutes)
 app.use('/api/questions', QuestionRoutes)
 app.use('/api/classrooms', ClassroomRoutes)
 app.use('/api/user', userRoutes)
-
+app.use('/api/scores', scoreRoutes);
  
 
 
