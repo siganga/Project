@@ -1,12 +1,16 @@
 /* GameScreen.css */
 .game-screen {
   display: flex;
-  justify-content: space-around; /* Distribute space evenly */
-  align-items: center; /* Vertically align items */
-  padding: 20px; /* Add some padding */
-  border: 1px solid gray; /* Optional border */
-  margin-bottom: 20px; /* Add margin */
-  position: relative; /* Needed for absolute positioning of life displays */
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  background-image: url('/img/game-background.png'); /* Add your background image here */
+  background-size: cover; /* Cover the entire container */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  background-position: center; /* Center the image */
+  min-height: 250px; /* Or whatever height you want */
 }
 
 
@@ -40,7 +44,8 @@
 .character-image {
   height: 100px; /* Adjust as needed */
   width: 100px; /* Adjust as needed */
-  margin-top: 10px; /* Space between lives and image */
+  margin-top: 110px; /* Space between lives and image     */ 
+     /*   transform: translateY(30px); Alternative to margin-top*/  
 }
 
 

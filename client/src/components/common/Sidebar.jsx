@@ -11,10 +11,10 @@ import { Link } from "react-router-dom";
 const SIDEBAR_ITEMS = [
 	
 	{
-		name: "Overview",
+		name: "Home",
 		icon: BookOpen,
 		color: "#6366f1",
-		href: "/OverviewPage",
+		href: "/",
 	},
 	
 	
