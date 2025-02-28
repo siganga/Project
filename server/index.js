@@ -2,18 +2,11 @@ const  express = require('express');
 
 /* Routes */
 
-//Recommendation routes
-const COBITRecRoutes  = require('./routes/Recommendations/COBITRecRoutes.js')
-const ISORecRoutes  = require('./routes/Recommendations/ISORecRoutes.js')
-const NISTRecRoutes  = require('./routes/Recommendations/NISTRecRoutes.js')
-
-//The routes
 const UnitRoutes  = require('./routes/CRUD/UnitRoutes.js')
 const LessonRoutes  = require('./routes/CRUD/LessonRoutes.js')
 const QuestionRoutes  = require('./routes/CRUD/QuestionRoutes.js')
 const ClassroomRoutes  = require('./routes/CRUD/ClassroomRoutes.js')
 const userRoutes = require('./routes/userRoutes.js')
-
 const scoreRoutes  = require('./routes/Other/scoreRoutes.js')
 
 
@@ -35,12 +28,6 @@ app.use(express.json())
 
 
 
-
-/*Route setup */
-
-app.use('/api/cobitRec', COBITRecRoutes)
-app.use('/api/isoRec', ISORecRoutes)
-app.use('/api/nistRec', NISTRecRoutes)
 
 
 /*Route setup*/
