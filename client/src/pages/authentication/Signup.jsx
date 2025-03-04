@@ -68,7 +68,7 @@ const Signup = () => {
                         id="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        className="mt-1 p-2 w-full text-black border rounded-md"
+                        className="mt-1 p-2 w-full border rounded-md"
                     />
                 </div>
 
@@ -79,7 +79,7 @@ const Signup = () => {
                         id="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
-                        className="mt-1  p-2 w-full text-black border rounded-md"
+                        className="mt-1  p-2 w-full border rounded-md"
                     />
                 </div>
 

@@ -25,8 +25,8 @@ import LessonPage from "./pages/LessonPage";
 
 
 //
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Signup from "./pages/Signup";// ./pages/authentication/Signup 
+import Login from "./pages/Login";// ./pages/authentication/Login 
 import ProfilePage from "./pages/ProfilePage";
 import ShareClassroomPage from './pages/ShareClassroomPage';
 import ScoresPage from './pages/ScoresPage';
@@ -71,8 +71,8 @@ function App() {
 			{shouldShowSidebar && <Sidebar />}
 			<Routes>
 				
-				<Route path='/' element={<HomePage />} />
-				<Route path='/home' element={<HomePage />} />
+				<Route path='/' element={<ProfilePage />} />
+				<Route path='/home' element={<ProfilePage />} />
 
 				
 			

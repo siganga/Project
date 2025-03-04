@@ -1,7 +1,7 @@
 // GameScreen.js
-import React, { useState, useEffect, useRef } from 'react'; // Import useRef
+import React, { useState, useEffect, useRef } from 'react'; 
 import './GameScreen.css';
-import hurtSound from '../assets/sounds/hurt.wav'; // Import your sound file
+import hurtSound from '../assets/sounds/hurt.wav'; 
 import gameMusic from '../assets/music/gameMusic.mp3'; 
 
 function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }) {
@@ -9,26 +9,26 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
   const [heroHurt, setHeroHurt] = useState(false);
   const [monsterHurt, setMonsterHurt] = useState(false);
   const [initialMonsterLives, setInitialMonsterLives] = useState(monsterLives);
-   const monsterHurtRef = useRef(false); //useRef to keep track of the animation status
-   const hurtSoundRef = useRef(new Audio(hurtSound)); // Create audio ref
+   const monsterHurtRef = useRef(false); //useRef utilized to keep track of the animation status
+   const hurtSoundRef = useRef(new Audio(hurtSound)); // audio ref created 
    const gameMusicRef = useRef(new Audio(gameMusic));
 
 
-  hurtSoundRef.current.volume = 0.5; // Set volume to 50% 
-  gameMusicRef.current.loop = true; // Loop the music
-  gameMusicRef.current.volume = 0.3; //adjust music volume
+  hurtSoundRef.current.volume = 0.5; // Sets volume to 50% 
+  gameMusicRef.current.loop = true; // Loops the music
+  gameMusicRef.current.volume = 0.3; //adjusts music volume
 
 
-  useEffect(() => {
+  useEffect(() => {   // Runs only once on mount and unmount
     gameMusicRef.current.play().catch(error => {
       console.error("Autoplay prevented:", error);
-    }); // Start playing music on mount, handle autoplay block
+    }); // Starts playing music on mount, handles autoplay block
 
     return () => {
-      gameMusicRef.current.pause(); //pause music when component unmounts.
-      gameMusicRef.current.currentTime = 0; //reset music to start.
+      gameMusicRef.current.pause(); //pauses music when component unmounts.
+      gameMusicRef.current.currentTime = 0; //resets music to start.
     };
-  }, []); // Run only once on mount and unmount
+  }, []); 
 
 
 
@@ -51,7 +51,7 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
   useEffect(() => {
     if (heroLives < 3) {
       setHeroHurt(true);
-      hurtSoundRef.current.play(); // Play sound
+      hurtSoundRef.current.play(); 
       const timer = setTimeout(() => setHeroHurt(false), 500);
       return () => clearTimeout(timer);
     }
@@ -74,7 +74,7 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
 
   useEffect(() => {
   setInitialMonsterLives(monsterLives);
-}, []); //run this useEffect only once. //
+}, []); 
 
   return (
     <div className="game-screen">

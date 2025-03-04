@@ -8,20 +8,54 @@ const ScoresPage = () => {
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/scores/${lessonId}`)
-      .then(res => res.json())
-      .then(data => setScores(data));
+      .then((res) => res.json())
+      .then((data) => {
+        // Sort scores by score in descending order
+        const sortedScores = data.sort((a, b) => b.score - a.score);
+        setScores(sortedScores);
+      });
   }, [lessonId]);
 
   return (
-    <div className='flex-1 overflow-auto relative z-10'>
-      <h2>Scores for Lesson</h2>
-      <ul>
-        {scores.map(score => (
-          <li key={score._id}>
-            User: {score.userId.name}, Score: {score.score}, Lesson: {score.lessonId.title}
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col flex-1 overflow-auto relative z-10 p-6">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-100">
+        Scores for Lesson
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white rounded-lg shadow-md">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="py-2 px-4 text-left font-semibold text-gray-700">
+                User
+              </th>
+              <th className="py-2 px-4 text-left font-semibold text-gray-700">
+                Score
+              </th>
+              <th className="py-2 px-4 text-left font-semibold text-gray-700">
+                Lesson
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {scores.map((score) => (
+              <tr key={score._id} className="border-b">
+                <td className="py-2 px-4 text-gray-800">
+                  {score.userId.name}
+                </td>
+                <td className="py-2 px-4 text-gray-800">{score.score}</td>
+                <td className="py-2 px-4 text-gray-800">
+                  {score.lessonId.title}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {scores.length === 0 && (
+          <div className="mt-4 text-center text-gray-500">
+            No scores available for this lesson.
+          </div>
+        )}
     </div>
   );
 };

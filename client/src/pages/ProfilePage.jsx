@@ -1,89 +1,65 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logout from './Logout';
+import Logout from './Logout'; //  '../components/authentication/Logout'
 import { useSelector } from 'react-redux';
 
 const ProfilePage = () => {
-  
+    const user = useSelector((state) => state.auth.user) || "";
+    const userEmail = user ? user.email : null;
+    const userName = user ? user.name : null;
+    const userLogged = user ? true : false;
+    const userId = user ? user.userId : null;
 
-  const user = useSelector((state) => state.auth.user) || "";
-  const userEmail = user ? user.email : null;
-  const userName = user ? user.name : null;
-  const userLogged = user ? true : false;
-  var userAdmin = false
-  var userAuth = false
+    let userAdmin = false;
+    let userAuth = false;
 
-   const userId = user ? user.userId: null;
+    if (user.role === 'student') {
+        userAdmin = true;
+    }
 
- // console.log(userEmail);
+    if (user.role === 'user') {
+        userAuth = true;
+    }
 
-  if(user.role === 'student'){//admin, user
-    var userAdmin = true 
-  } 
+    return (
+        <div className="flex-1 overflow-auto relative z-10 p-6">
+            <ul className="space-y-2">
+                <li>
+                    <Link to="/" className="text-blue-600 hover:underline">Home</Link>
+                </li>
 
-  if(user.role === 'user'){//admin, user
-    var userAuth = true 
-  } 
- 
- 
+                {!userLogged && (
+                    <>
+                        <li>
+                            <Link to="/signup" className="text-blue-600 hover:underline">Sign Up</Link>
+                        </li>
+                        <li>
+                            <Link to="/login" className="text-blue-600 hover:underline">Log In</Link>
+                        </li>
+                    </>
+                )}
 
-  return (
-    <div className='flex-1 overflow-auto relative z-10'>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-
-        {!userLogged && (
-          <>
-            <li>
-                <Link to="/signup">Sign Up</Link>
-            </li>
-
-            <li>
-                <Link to="/login">Log In</Link>
-            </li>
-          </>
-        )}
-
-        
-
-        { userLogged && (
-
-          <>
-
-        <li>
-          <div>{userEmail}</div>
-           <div>{userName}</div>
-           <div> {userId} </div>
-        </li>
-
-        <li>
-          <Logout />
-        </li>
-
-
-        </>
-
-      )}
-
-
-
-
-
-      {/*
-        <li>
-          <div>Cart</div> {/*Badge Content from material ui default 4 items/}
-        </li>
-
-        <li>
-          <Link to="/newhome">New Home</Link>
-        </li>
-        */}
-
-      </ul>
-    </div>
-  );
+                {userLogged && (
+                    <>
+                        <li className="border rounded p-3">
+                            <div>
+                                <span className="font-semibold">Email:</span> {userEmail}
+                            </div>
+                            <div>
+                                <span className="font-semibold">Name:</span> {userName}
+                            </div>
+                            <div>
+                                <span className="font-semibold">User ID:</span> {userId}
+                            </div>
+                        </li>
+                        <li>
+                            <Logout />
+                        </li>
+                    </>
+                )}
+            </ul>
+        </div>
+    );
 };
 
 export default ProfilePage;

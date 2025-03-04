@@ -127,14 +127,14 @@ function AnswerQuestions() {
         isAttacking={isAttacking}
         isMonsterAttacking={isMonsterAttacking}
       />
-      <h1 className="text-2xl font-bold mb-4">{lessonTitle} - Question {currentQuestionIndex + 1} of {questions.length}</h1>
+      <h1 className="text-2xl  font-bold mb-4">{lessonTitle} - Question {currentQuestionIndex + 1} of {questions.length}</h1>
       <p className="mb-2">{currentQuestion.text}</p>
       <input
         type="text"
         value={userAnswer}
         onChange={e => setUserAnswer(e.target.value)}
         placeholder="Your Answer"
-        className="border border-gray-300 rounded px-3 py-2 mb-2 w-full"
+        className="border border-gray-300 text-black rounded px-3 py-2 mb-2 w-full"
         disabled={questionAnswered}
       />
       <button

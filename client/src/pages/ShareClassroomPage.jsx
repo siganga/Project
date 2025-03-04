@@ -54,14 +54,13 @@ const ShareClassroomPage = () => {
 
             if (response.ok) {
                 alert('Classroom shared successfully!');
-                setEmail(''); // Clear the input after successful share
-                // Refetch shared users to update the list
+                setEmail('');
                 const sharedUsersResponse = await fetch(`http://localhost:5000/api/classrooms/${id}/sharedUsers?userId=${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                if(sharedUsersResponse.ok){
+                if (sharedUsersResponse.ok) {
                     const newData = await sharedUsersResponse.json();
                     setSharedUsers(newData);
                 }
@@ -75,23 +74,51 @@ const ShareClassroomPage = () => {
         }
     };
 
-    return (
-        <div className='flex-1 overflow-auto relative z-10'>
-            <h2>Share Classroom</h2>
-            <input
-                type="email"
-                placeholder="Enter user's email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <button onClick={handleShare}>Share</button>
+    const handleBack = () => {
+        navigate(-1);
+    };
 
-            <h3>Shared With:</h3>
-            <ul>
-                {sharedUsers.map((user) => (
-                    <li key={user._id}>{user.email}</li>
-                ))}
-            </ul>
+    return (
+        <div className="flex-1 overflow-auto relative z-10 p-6">
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-semibold">Share Classroom</h2>
+                <button
+                    onClick={handleBack}
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Back
+                </button>
+            </div>
+            <div className="mb-4">
+                <input
+                    type="email"
+                    placeholder="Enter user's email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="border rounded p-2 w-full"
+                />
+                <button
+                    onClick={handleShare}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mt-2"
+                >
+                    Share
+                </button>
+            </div>
+
+            <div>
+                <h3 className="text-lg font-semibold mb-2">Shared With:</h3>
+                {sharedUsers.length > 0 ? (
+                    <ul className="space-y-2">
+                        {sharedUsers.map((user) => (
+                            <li key={user._id} className="border rounded p-3">
+                                {user.email}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="text-gray-500">No users shared yet.</p>
+                )}
+            </div>
         </div>
     );
 };

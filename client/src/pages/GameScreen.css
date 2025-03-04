@@ -6,30 +6,30 @@
   padding: 20px;
   margin-bottom: 20px;
   position: relative;
-  background-image: url('/img/game-background.png'); /* Add your background image here */
+  background-image: url('/img/game-background.png'); /*  background image  */
   background-size: cover; /* Cover the entire container */
   background-repeat: no-repeat; /* Prevent image repetition */
   background-position: center; /* Center the image */
-  min-height: 250px; /* Or whatever height you want */
+  min-height: 250px; /* minimum height  */
 }
 
 
 .life-display {
-  position: absolute; /* Position the life displays */
-  font-size: 20px; /* Adjust font size as needed */
-  padding: 5px 10px; /* Add some padding */
+  position: absolute; /* Positions the life displays */
+  font-size: 20px; /* Adjusts font size */
+  padding: 5px 10px; /*  padding */
   background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
-  border-radius: 5px; /* Add rounded corners */
+  border-radius: 5px; /* Adds rounded corners */
 }
 
 .top-left {
-  top: 20px; /* Adjust top position as needed */
-  left: 20px; /* Adjust left position as needed */
+  top: 20px; /* Adjusts top position  */
+  left: 20px; /* Adjusts left position  */
 }
 
 .top-right {
-  top: 20px; /* Adjust top position as needed */
-  right: 20px; /* Adjust right position as needed */
+  top: 20px; /* Adjusts top position  */
+  right: 20px; /* Adjusst right position  */
 }
 
 
@@ -42,9 +42,9 @@
 }
 
 .character-image {
-  height: 100px; /* Adjust as needed */
+  height:100px  ; /* Adjust as needed originally  100px   350px*/  
   width: 100px; /* Adjust as needed */
-  margin-top: 110px; /* Space between lives and image     */ 
+  margin-top: 170px; /* Space between lives and image     */ 
      /*   transform: translateY(30px); Alternative to margin-top*/  
 }
 
@@ -82,7 +82,7 @@
   animation: hurt 0.5s ease-in-out;
   position: absolute;
 
-  top: 10%; /* Adjust level of hurt gif */
+  top: 10%; /* Adjusts level of hurt gif */
     transform: translateY(-50%); /* Center vertically */
 }
 
@@ -91,7 +91,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1); /* Slightly enlarge the image */
+    transform: scale(1.1); /* Slightly enlarges the image */
   }
   100% {
     transform: scale(1);
@@ -103,11 +103,11 @@
 
 
 .hero-attack-position {
-    right: 30%; /* Adjust this value to control the final position */
+    right: 30%; /* Value adjusts final position */
 }
 
 .monster-attack-position {
-    left: 28%; /* Adjust this value to control the final position */
+    left: 28%; /* Value adjusts final position */
 }
 
 @keyframes attack {
@@ -115,7 +115,7 @@
         transform: translateX(0);
     }
     50% {
-        transform: translateX(20px); /* Adjust this value for mid-animation movement */
+        transform: translateX(20px); /* Value adjusts for mid-animation movement */
     }
     100% {
         transform: translateX(0);

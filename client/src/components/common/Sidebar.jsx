@@ -1,4 +1,4 @@
-import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, Home, Lightbulb, Wrench, BookOpen
+import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, Home, Lightbulb, CircleUser ,Wrench, Plus ,BookOpen,
  } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 //{ name: "ISO Questionnaire", icon: Settings, color: "#6EE7B7", href: "/ISO-Q" },
 //  { name: "Units", icon: Wrench, color: "#10B981", href: "/tools" },
 
-
+//{ name: "Go Back Home", icon: Home, color: "#6EE7B7", href: "/" },   
 const SIDEBAR_ITEMS = [
 	
 	{
 		name: "Home",
-		icon: BookOpen,
+		icon: Home,
 		color: "#6366f1",
 		href: "/",
 	},
@@ -22,14 +22,14 @@ const SIDEBAR_ITEMS = [
 	
 
 	
-	{ name: "Profile Page", icon: BarChart2, color: "#3B82F6", href: "/profile" },
+	{ name: "Profile", icon: CircleUser, color: "#3B82F6", href: "/profile" },
 
-	{ name: "Add Classrooms", icon: Wrench, color: "#10B981", href: "/add-classrooms" },
+	{ name: "Create Classroom", icon: Plus, color: "#10B981", href: "/add-classrooms" },
 	
-	{ name: "Classrooms", icon: Lightbulb, color: "#6EE7B7", href: "/classrooms" },
+	{ name: "Classrooms", icon: BookOpen , color: "#6EE7B7", href: "/classrooms" },
 	
 	
-	{ name: "Go Back Home", icon: Home, color: "#6EE7B7", href: "/" },   
+	
 ];
 
 const Sidebar = () => {
