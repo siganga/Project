@@ -53,7 +53,12 @@ function App() {
     '/ans-questions/:lessonId',
     '/home',
   ];
-  const shouldShowSidebar = !noSidebarPaths.includes(location.pathname);
+  //const shouldShowSidebar = !noSidebarPaths.includes(location.pathname);
+
+
+const shouldShowSidebar = !noSidebarPaths.includes(location.pathname) && 
+                            !location.pathname.startsWith('/ans-questions');
+
 
 	return (
 		 

@@ -95,7 +95,7 @@ const ShareClassroomPage = () => {
                     placeholder="Enter user's email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="border rounded p-2 w-full"
+                    className="border text-black rounded p-2 w-full"
                 />
                 <button
                     onClick={handleShare}

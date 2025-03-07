@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 
 const AddUnit = () => {
     const [units, setUnits] = useState([]);
     const [newUnitTitle, setNewUnitTitle] = useState('');
     const { classroomId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const classroomTitle = location.state?.classroomTitle || "Unknown Classroom";
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/units?classroom=${classroomId}`)
@@ -36,8 +39,12 @@ const AddUnit = () => {
     return (
         <div className="flex-1 overflow-auto relative z-10 p-6">
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-semibold">Units (Classroom: {classroomId})</h1>
-                
+            <div className="mb-1">
+             <h1 className="text-2xl font-semibold mb-2">Classroom: {classroomTitle}</h1>
+            
+                <h1 className="text-2xl font-semibold mb-2">Units</h1>
+               
+            </div> 
             </div>
             <div className="mb-4">
                 <div className="flex space-x-2">
@@ -46,7 +53,7 @@ const AddUnit = () => {
                         value={newUnitTitle}
                         onChange={e => setNewUnitTitle(e.target.value)}
                         placeholder="Unit Title"
-                        className="border rounded p-2 flex-grow"
+                        className="border text-black rounded p-2 flex-grow"
                     />
                     <button
                         onClick={handleAddUnit}
@@ -58,7 +65,7 @@ const AddUnit = () => {
             </div>
 
             <div className="mt-4">
-                <h2 className="text-lg font-semibold mb-2">Units</h2>
+                <h2 className="text-lg font-semibold mb-2">{/*Units*/}</h2>
                 {units.length > 0 ? (
                     <ul className="space-y-2">
                         {units.map(unit => (

@@ -20,7 +20,14 @@ const ClassroomPage = () => {
     }, [userId]);
 
     
-   
+   /*
+     <Link to={`/classrooms/${classroom._id}/share`}>
+                                        <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm">
+                                            Share Classroom
+                                        </button>
+                                    </Link>
+
+   */
 
     return (
         <div className="flex-1 overflow-auto relative z-10 p-6">
@@ -40,16 +47,15 @@ const ClassroomPage = () => {
                                 <span>{classroom.title}</span>
                                 <div className="flex space-x-2">
                                    
-                                    <Link to={`/unit/${classroom._id}`}>
+                                    <Link 
+                                        to={`/unit/${classroom._id}`}
+                                        state={{ classroomTitle: classroom.title }}
+                                    >
                                         <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded text-sm">
                                              Units
                                         </button>
                                     </Link>
-                                    <Link to={`/classrooms/${classroom._id}/share`}>
-                                        <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm">
-                                            Share
-                                        </button>
-                                    </Link>
+                                   
                                 </div>
                             </li>
                         ))}

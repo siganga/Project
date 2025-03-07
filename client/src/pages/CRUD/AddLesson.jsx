@@ -6,8 +6,7 @@ const AddLesson = () => {
     const [lessons, setLessons] = useState([]);
     const [newLessonTitle, setNewLessonTitle] = useState('');
     const [unitTitle, setUnitTitle] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
-
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/lessons/unit/${unitId}`)
@@ -52,7 +51,7 @@ const AddLesson = () => {
                         value={newLessonTitle}
                         onChange={e => setNewLessonTitle(e.target.value)}
                         placeholder="Lesson Title"
-                        className="border rounded p-2 flex-grow"
+                        className="border text-black rounded p-2 flex-grow"
                     />
                     <button
                         onClick={handleAddLesson}
@@ -64,7 +63,7 @@ const AddLesson = () => {
             </div>
 
             <div className="mt-4">
-                <h2 className="text-lg font-semibold mb-2">Lessons</h2>
+                <h2 className="text-lg font-semibold mb-2"></h2>
                 {lessons.length > 0 ? (
                     <ul className="space-y-2">
                         {lessons.map(lesson => (

@@ -127,7 +127,7 @@ function AnswerQuestions() {
         isAttacking={isAttacking}
         isMonsterAttacking={isMonsterAttacking}
       />
-      <h1 className="text-2xl  font-bold mb-4">{lessonTitle} - Question {currentQuestionIndex + 1} of {questions.length}</h1>
+      <h1 className="text-2xl  font-bold mb-4">{lessonTitle}  Question {currentQuestionIndex + 1} of {questions.length}</h1>
       <p className="mb-2">{currentQuestion.text}</p>
       <input
         type="text"

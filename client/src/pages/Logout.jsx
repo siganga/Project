@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Logout() {
     
     const dispatch = useDispatch();
-    const auth = useSelector((state) => state.auth);// Maybe not needed, handle logout  below
+    const auth = useSelector((state) => state.auth);
     const navigate = useNavigate()
 
     
@@ -22,7 +22,7 @@ function Logout() {
 
   return (
     <div>
-         <button onClick={handleClick}> logout </button>
+         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleClick}  > Logout </button>
     </div>
   )
   

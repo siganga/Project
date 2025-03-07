@@ -8,14 +8,20 @@ import { Link } from "react-router-dom";
 //  { name: "Units", icon: Wrench, color: "#10B981", href: "/tools" },
 
 //{ name: "Go Back Home", icon: Home, color: "#6EE7B7", href: "/" },   
-const SIDEBAR_ITEMS = [
-	
-	{
+
+/*
+
+{
 		name: "Home",
 		icon: Home,
 		color: "#6366f1",
 		href: "/",
 	},
+
+*/
+const SIDEBAR_ITEMS = [
+	
+	
 	
 	
 

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 
 const UnitPage = () => {
     const [units, setUnits] = useState([]);
     
     const { classroomId } = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const classroomTitle = location.state?.classroomTitle || "Unknown Classroom";
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/units?classroom=${classroomId}`)
@@ -15,12 +18,16 @@ const UnitPage = () => {
    
 
     // <h1 className="text-2xl font-semibold mb-2">Units (Classroom: {classroomId})</h1>
-               
+            
+  const handleBack = () => {
+        navigate(-1);
+    };             
 
     return (
         <div className="flex-1 overflow-auto relative z-10 p-6">
             <div className="mb-4">
-                <h1 className="text-2xl font-semibold mb-2">Classroom: {classroomId}</h1>
+             <h1 className="text-2xl font-semibold mb-2">Classroom: {classroomTitle}</h1>
+            
                 <h1 className="text-2xl font-semibold mb-2">Units</h1>
                
             </div>
@@ -49,6 +56,13 @@ const UnitPage = () => {
                     <p className="text-gray-500">No units available.</p>
                 )}
             </div>
+
+            <button
+                    onClick={handleBack}
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4  mt-4 rounded"
+                >
+                    Back
+                </button>
         </div>
     );
 };

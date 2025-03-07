@@ -1,0 +1,88 @@
+
+
+
+
+Biology
+
+Question: What is the basic unit of life?
+Answer: Cell.
+
+Question: What organelle produces ATP (energy)?
+
+    Answer: Mitochondria.
+
+Question: What is the genetic material of a cell?
+
+    Answer: DNA.
+
+Question: What process creates two identical cells?
+
+    Answer: Mitosis.
+
+Question: What process creates sex cells?
+
+    Answer: Meiosis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Physics
+kinematics
+Question: What is the change in position of an object called?
+
+    Answer: Displacement.
+
+Question: What is the rate of change of velocity?
+
+    Answer: Acceleration.
+
+Question: What is the distance traveled per unit time?
+
+    Answer: Speed.
+
+Question: What is speed with direction?
+
+    Answer: Velocity.
+
+Question: What resists a change in motion?
+
+    Answer: Inertia.
+
+
+
+
+
+Sample User
+John Tester
+
+johntester@gmail.com
+
+
+
+
+
+
+

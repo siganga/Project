@@ -19,7 +19,7 @@ const ScoresPage = () => {
   return (
     <div className="flex flex-col flex-1 overflow-auto relative z-10 p-6">
       <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-        Scores for Lesson
+          Leaderboard
       </h2>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow-md">

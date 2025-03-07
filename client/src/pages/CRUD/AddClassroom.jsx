@@ -65,7 +65,7 @@ const AddClassroom = () => {
                         value={newClassroomTitle}
                         onChange={e => setNewClassroomTitle(e.target.value)}
                         placeholder="Classroom Title"
-                        className="border rounded p-2 flex-grow"
+                        className="border text-black rounded p-2 flex-grow"
                     />
                     <button
                         onClick={handleAddClassroom}
@@ -77,7 +77,7 @@ const AddClassroom = () => {
             </div>
 
             <div className="mt-4">
-                <h2 className="text-lg font-semibold mb-2">Classrooms</h2>
+                <h2 className="text-lg font-semibold mb-2">{/*Classrooms*/}</h2>
                 {classrooms.length > 0 ? (
                     <ul className="space-y-2">
                         {classrooms.map(classroom => (
@@ -93,14 +93,18 @@ const AddClassroom = () => {
                                     >
                                         Delete
                                     </button>
-                                    <Link to={`/add-unit/${classroom._id}`}>
+                                    <Link 
+                                        to={`/add-unit/${classroom._id}`}
+                                        state={{ classroomTitle: classroom.title }}
+                                    >
+                                    
                                         <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded text-sm">
                                             Add Unit
                                         </button>
                                     </Link>
                                     <Link to={`/classrooms/${classroom._id}/share`}>
                                         <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm">
-                                            Share
+                                            Share Classroom
                                         </button>
                                     </Link>
                                 </div>

@@ -62,13 +62,13 @@ const Login = () => {
                 <h3 className="text-2xl text-black  font-semibold mb-4">Log In</h3>
 
                 <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-black-700">Email:</label>
+                    <label htmlFor="email" className="block text-sm font-medium text-black">Email:</label>
                     <input
                         type="email"
                         id="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full text-black border rounded-md"
                     />
                 </div>
 
@@ -79,7 +79,7 @@ const Login = () => {
                         id="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 text-black w-full border rounded-md"
                     />
                 </div>
 

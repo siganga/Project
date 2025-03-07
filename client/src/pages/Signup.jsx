@@ -90,7 +90,7 @@ const Signup = () => {
                         id="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full text-black border rounded-md"
                     />
                 </div>
 

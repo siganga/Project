@@ -47,21 +47,21 @@ const AddQuestion = () => {
     return (
         <div className="flex-1 overflow-auto relative z-10 p-6">
             <div className="mb-4">
-                <h1 className="text-2xl font-semibold mb-2">{lessonTitle} - Add Question</h1>
+                <h1 className="text-2xl font-semibold mb-2">{lessonTitle} Add Question</h1>
                 <div className="space-y-2">
                     <input
                         type="text"
                         value={newQuestionText}
                         onChange={e => setNewQuestionText(e.target.value)}
                         placeholder="Question Text"
-                        className="border rounded p-2 w-full"
+                        className="border text-black rounded p-2 w-full"
                     />
                     <input
                         type="text"
                         value={newQuestionAnswer}
                         onChange={e => setNewQuestionAnswer(e.target.value)}
                         placeholder="Question Answer"
-                        className="border rounded p-2 w-full"
+                        className="border text-black rounded p-2 w-full"
                     />
                     <button
                         onClick={handleAddQuestion}

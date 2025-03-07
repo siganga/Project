@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const LessonPage = () => {
     const { unitId } = useParams();
     const [lessons, setLessons] = useState([]);
   
     const [unitTitle, setUnitTitle] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/lessons/unit/${unitId}`)
@@ -17,7 +18,9 @@ const LessonPage = () => {
             .then(unitData => setUnitTitle(unitData.title));
     }, [unitId]);
 
-   
+   const handleBack = () => {
+        navigate(-1); // Navigate back one page in history
+    };
 
     
     return (
@@ -29,7 +32,7 @@ const LessonPage = () => {
             </div>
 
             <div className="mt-4">
-                <h2 className="text-lg font-semibold mb-2">Lessons</h2>
+                {/*<h2 className="text-lg font-semibold mb-2">Lessons</h2>*/}
                 {lessons.length > 0 ? (
                     <ul className="space-y-2">
                         {lessons.map(lesson => (
@@ -40,17 +43,18 @@ const LessonPage = () => {
                                 <span>{lesson.title}</span>
                                 <div className="flex space-x-2">
                                    
+                                    <Link to={`/ans-questions/${lesson._id}`}>
+                                        <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded text-sm">
+                                            Start
+                                        </button>
+                                    </Link>
                                     
                                     <Link to={`/scores/${lesson._id}`}>
                                         <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm">
-                                            Scores
+                                            Leaderboard
                                         </button>
                                     </Link>
-                                    <Link to={`/ans-questions/${lesson._id}`}>
-                                        <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded text-sm">
-                                            Answer Questions
-                                        </button>
-                                    </Link>
+                                   
                                 </div>
                             </li>
                         ))}
@@ -61,11 +65,12 @@ const LessonPage = () => {
             </div>
 
             <div className="mt-4">
-                <Link to="/units">
-                    <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                        Back to Units
-                    </button>
-                </Link>
+                <button
+                    onClick={handleBack} // Use the handleBack function
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Back
+                </button>
             </div>
         </div>
     );
