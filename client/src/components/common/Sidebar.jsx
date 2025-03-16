@@ -1,4 +1,4 @@
-import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, Home, Lightbulb, CircleUser ,Wrench, Plus ,BookOpen,
+import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, Home, Lightbulb, CircleUser ,Wrench, Plus ,BookOpen, MessageCircle
  } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,6 +18,9 @@ import { Link } from "react-router-dom";
 		href: "/",
 	},
 
+
+	{ name: "Messages", icon: MessageCircle , color: "#6EE7B7", href: "/classrooms" },
+
 */
 const SIDEBAR_ITEMS = [
 	
@@ -25,14 +28,22 @@ const SIDEBAR_ITEMS = [
 	
 	
 
+	{
+		name: "Home",
+		icon: Home,
+		color: "#6366f1",
+		href: "/",
+	},
 	
-
 	
 	{ name: "Profile", icon: CircleUser, color: "#3B82F6", href: "/profile" },
 
 	{ name: "Create Classroom", icon: Plus, color: "#10B981", href: "/add-classrooms" },
 	
 	{ name: "Classrooms", icon: BookOpen , color: "#6EE7B7", href: "/classrooms" },
+
+	
+	
 	
 	
 	

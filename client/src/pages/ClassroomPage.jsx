@@ -55,6 +55,12 @@ const ClassroomPage = () => {
                                              Units
                                         </button>
                                     </Link>
+
+                                    <Link to={`/classrooms/${classroom._id}/users`}>
+                                        <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm">
+                                            Members
+                                        </button>
+                                    </Link>
                                    
                                 </div>
                             </li>

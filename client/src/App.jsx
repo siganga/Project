@@ -16,8 +16,7 @@ import AddUnit from "./pages/CRUD/AddUnit"
 import AddClassroom from "./pages/CRUD/AddClassroom"
 
 
-//
-
+//CRUD pages
 import UnitPage from "./pages/UnitPage";
 import ClassroomPage from "./pages/ClassroomPage";
 import AnswerQuestions from "./pages/AnswerQuestions";
@@ -32,8 +31,10 @@ import ShareClassroomPage from './pages/ShareClassroomPage';
 import ScoresPage from './pages/ScoresPage';
 
 
+//
 
 
+import ClassroomUsersPage from './pages/secondary-pages/ClassroomUsersPage.jsx';
 
 
 
@@ -113,6 +114,8 @@ const shouldShowSidebar = !noSidebarPaths.includes(location.pathname) &&
         <Route path="/classrooms/:id/share" element={<ShareClassroomPage />} />
         <Route path="/scores/:lessonId" element={<ScoresPage />} />
 
+        <Route path="/classrooms/:id/users" element={<ClassroomUsersPage />} />
+        
 
 				
 				

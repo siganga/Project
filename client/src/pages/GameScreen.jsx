@@ -4,7 +4,7 @@ import './GameScreen.css';
 import hurtSound from '../assets/sounds/hurt.wav'; 
 import gameMusic from '../assets/music/gameMusic.mp3'; 
 
-function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }) {
+function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking, score }) {
   const [animation, setAnimation] = useState(null);
   const [heroHurt, setHeroHurt] = useState(false);
   const [monsterHurt, setMonsterHurt] = useState(false);
@@ -78,10 +78,15 @@ function GameScreen({ heroLives, monsterLives, isAttacking, isMonsterAttacking }
 
   return (
     <div className="game-screen">
-      <div className="life-display top-left">
+      <div className="life-display top-left text-black">
         Hero: {heroLives} lives
       </div>
-      <div className="life-display top-right">
+
+      <div className="score-display top-center text-black">
+          Score: {score}
+      </div>
+      
+      <div className="life-display top-right text-black">
         Monster: {monsterLives} lives
       </div>
 
