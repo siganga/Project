@@ -77,7 +77,7 @@ const shouldShowSidebar = !noSidebarPaths.includes(location.pathname) &&
 			{shouldShowSidebar && <Sidebar />}
 			<Routes>
 				
-				<Route path='/' element={<ProfilePage />} />
+				<Route path='/' element={<HomePage/>} />
 				<Route path='/home' element={<ProfilePage />} />
 
 				

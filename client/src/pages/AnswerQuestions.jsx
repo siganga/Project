@@ -85,7 +85,7 @@ function AnswerQuestions() {
         alert(`You have reached the end of the questions. Your final score is: ${score}. User not logged in. Score not saved.`);
       }
 
-      navigate(`/lesson/${lessonId}`);
+      navigate(`/`);
     }
   };
 
@@ -105,7 +105,7 @@ function AnswerQuestions() {
 
     if (monsterLives <= 1 && isCorrect) {
       alert(`Congratulations! You've defeated the monster! Your final score is: ${score}`);
-      navigate(`/lesson/${lessonId}`);
+      navigate(`/`);
     }
     if (heroLives <= 1 && !isCorrect) {
       alert(`Game Over! The monster has defeated you! Your final score is: ${score}`);

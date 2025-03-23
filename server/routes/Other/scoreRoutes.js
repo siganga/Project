@@ -27,7 +27,7 @@ router.get('/:lessonId', async (req, res) => {
 });
 
 
-// POST /api/scores
+/// POST /api/scores
 router.post('/', async (req, res) => {
   try {
     const { userId, lessonId, score } = req.body;
@@ -43,11 +43,55 @@ router.post('/', async (req, res) => {
     });
 
     await newScore.save();
-    res.status(201).json({ message: 'Score saved successfully' });
+
+    // Update user's streak
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const today = new Date();
+    const lastSaveDate = user.lastScoreSaveDate;
+
+    if (lastSaveDate) {
+      if (
+        lastSaveDate.getDate() === today.getDate() &&
+        lastSaveDate.getMonth() === today.getMonth() &&
+        lastSaveDate.getFullYear() === today.getFullYear()
+      ) {
+        // User already saved a score today
+      } else {
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+
+        if (
+          lastSaveDate.getDate() === yesterday.getDate() &&
+          lastSaveDate.getMonth() === yesterday.getMonth() &&
+          lastSaveDate.getFullYear() === yesterday.getFullYear()
+        ) {
+          user.streak += 1;
+        } else {
+          user.streak = 1;
+        }
+      }
+    } else {
+      user.streak = 1;
+    }
+
+    user.lastScoreSaveDate = today;
+    await user.save();
+
+    res.status(201).json({ message: 'Score saved successfully', streak: user.streak }); //send back the streak.
   } catch (error) {
     console.error('Error saving score:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
+
+
+
+
 
 module.exports = router;

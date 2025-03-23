@@ -32,7 +32,15 @@ const userSchema = new Schema({
   suspended: {
     type: Boolean,
     default: false
-  }
+  },
+    streak: { // Add streak field
+        type: Number,
+        default: 0
+    },
+    lastScoreSaveDate: { // Add last score save date field
+        type: Date,
+        default: null
+    }
 
 
 })
