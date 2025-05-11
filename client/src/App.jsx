@@ -30,11 +30,15 @@ import ProfilePage from "./pages/ProfilePage";
 import ShareClassroomPage from './pages/ShareClassroomPage';
 import ScoresPage from './pages/ScoresPage';
 
+import GeminiPromptPage from './pages/GeminiPromptPage';
+
 
 //
 
 
 import ClassroomUsersPage from './pages/secondary-pages/ClassroomUsersPage.jsx';
+import UploadAsset from './pages/secondary-pages/UploadAsset.jsx';
+import AssetList from './pages/secondary-pages/AssetList.jsx';
 
 
 
@@ -117,7 +121,12 @@ const shouldShowSidebar = !noSidebarPaths.includes(location.pathname) &&
         <Route path="/classrooms/:id/users" element={<ClassroomUsersPage />} />
         
 
-				
+			<Route path="/gem" element={<GeminiPromptPage />} />	
+
+
+
+			<Route path="/upload-asset" element={<UploadAsset />} />
+			<Route path="/assets" element={<AssetList />} />
 				
 
 

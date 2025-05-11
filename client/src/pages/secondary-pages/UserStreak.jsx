@@ -6,6 +6,14 @@ import silverTrophy from '../../assets/trophies/silver-trophy.png';
 import goldTrophy from '../../assets/trophies/gold-trophy.png';
 import platinumTrophy from '../../assets/trophies/platinum-trophy.png';
 
+import StatCard from '../../components/common/StatCard'; 
+
+
+
+
+
+
+
 
 function UserStreak() {
   const [streak, setStreak] = useState(null);

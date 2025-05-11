@@ -8,6 +8,9 @@ const QuestionRoutes  = require('./routes/CRUD/QuestionRoutes.js')
 const ClassroomRoutes  = require('./routes/CRUD/ClassroomRoutes.js')
 const userRoutes = require('./routes/userRoutes.js')
 const scoreRoutes  = require('./routes/Other/scoreRoutes.js')
+const assetRoutes  = require('./routes/Other/assetRoutes.js')
+
+
 
 
 /* Imports*/
@@ -37,7 +40,7 @@ app.use('/api/questions', QuestionRoutes)
 app.use('/api/classrooms', ClassroomRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/scores', scoreRoutes);
- 
+app.use('/api/assets', assetRoutes);
 
 
 const uri = "mongodb+srv://itachi:abcd1234@mernapp.cdmbs.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp";

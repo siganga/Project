@@ -1,10 +1,13 @@
 // AnswerQuestions.js
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import GameScreen from './GameScreen';
-import { useSelector } from 'react-redux'; // Import useSelector
 
-function AnswerQuestions() {
+ import React, { useState, useEffect } from 'react';
+ import { useParams, useNavigate } from 'react-router-dom';
+ import GameScreen from './GameScreen';
+ import { useSelector } from 'react-redux';
+ import ExplanationModal from './ExplanationModal'; // Import the explanation modal
+import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new answer checker component
+
+ function AnswerQuestions() {
   const { lessonId } = useParams();
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
@@ -12,6 +15,7 @@ function AnswerQuestions() {
   const [userAnswer, setUserAnswer] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [correct, setCorrect] = useState(null);
+  const [isCheckingAnswer, setIsCheckingAnswer] = useState(false); // New state for checking status
   const [lessonTitle, setLessonTitle] = useState('');
   const [heroLives, setHeroLives] = useState(3);
   const [monsterLives, setMonsterLives] = useState(0);
@@ -19,18 +23,20 @@ function AnswerQuestions() {
   const [isMonsterAttacking, setIsMonsterAttacking] = useState(false);
   const [score, setScore] = useState(0);
   const [questionAnswered, setQuestionAnswered] = useState(false);
+  const [isExplanationOpen, setIsExplanationOpen] = useState(false); // State for the explanation modal
+  const [explanation, setExplanation] = useState(''); // State to hold the explanation
 
-  const user = useSelector((state) => state.auth.user) || ""; // Get user from Redux
-  const userId = user ? user.userId : null; // Extract userId
+  const user = useSelector((state) => state.auth.user) || "";
+  const userId = user ? user.userId : null;
 
   useEffect(() => {
-   fetch(`http://localhost:5000/api/questions/lesson/${lessonId}`)
+    fetch(`http://localhost:5000/api/questions/lesson/${lessonId}`)
       .then(res => res.json())
       .then(data => {
         setQuestions(data);
-        setMonsterLives(data.length); // Set monster lives to the number of questions
+        setMonsterLives(data.length);
       });
-      
+
     fetch(`http://localhost:5000/api/lessons/${lessonId}`)
       .then(res => res.json())
       .then(lessonData => setLessonTitle(lessonData.title));
@@ -56,9 +62,11 @@ function AnswerQuestions() {
       setUserAnswer('');
       setSubmitted(false);
       setCorrect(null);
+      setIsCheckingAnswer(false); // Reset checking state
       setQuestionAnswered(false);
+      setIsExplanationOpen(false); // Close explanation modal on next question
+      setExplanation(''); // Clear any previous explanation
     } else {
-      // Store the score when the last question is answered
       if (userId) {
         try {
           const response = await fetch('http://localhost:5000/api/scores', {
@@ -84,7 +92,6 @@ function AnswerQuestions() {
       } else {
         alert(`You have reached the end of the questions. Your final score is: ${score}. User not logged in. Score not saved.`);
       }
-
       navigate(`/`);
     }
   };
@@ -94,9 +101,15 @@ function AnswerQuestions() {
 
     setSubmitted(true);
     setQuestionAnswered(true);
+    setIsCheckingAnswer(true); // Set checking state to true
+    setCorrect(null); // Reset correct state
+
     const currentQuestion = questions[currentQuestionIndex];
-    const isCorrect = userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase();
+
+    // Use the AnswerChecker component to determine if the answer is correct
+    const isCorrect = await AnswerChecker(currentQuestion.text, userAnswer, currentQuestion.answer);
     setCorrect(isCorrect);
+    setIsCheckingAnswer(false); // Reset checking state after getting the result
     await handleAttackAnimation(isCorrect);
 
     if (isCorrect) {
@@ -111,6 +124,14 @@ function AnswerQuestions() {
       alert(`Game Over! The monster has defeated you! Your final score is: ${score}`);
       navigate(`/`);
     }
+  };
+
+  const handleExplanationClick = () => {
+    setIsExplanationOpen(true);
+  };
+
+  const handleCloseExplanation = () => {
+    setIsExplanationOpen(false);
   };
 
   if (questions.length === 0) {
@@ -128,7 +149,7 @@ function AnswerQuestions() {
         isMonsterAttacking={isMonsterAttacking}
         score={score}
       />
-      <h1 className="text-2xl  font-bold mb-4">{lessonTitle}  Question {currentQuestionIndex + 1} of {questions.length}</h1>
+      <h1 className="text-2xl font-bold mb-4">{lessonTitle} Question {currentQuestionIndex + 1} of {questions.length}</h1>
       <p className="mb-2">{currentQuestion.text}</p>
       <input
         type="text"
@@ -159,7 +180,11 @@ function AnswerQuestions() {
         <div>
           <p
             className={`mt-2 ${
-              correct ? 'text-green-500 bg-green-100 p-2 rounded' : 'text-red-500 bg-red-100 p-2 rounded'
+              isCheckingAnswer
+                ? 'text-gray-500 bg-gray-100 p-2 rounded' // Neutral grey while checking
+                : correct
+                  ? 'text-green-500 bg-green-100 p-2 rounded'
+                  : 'text-red-500 bg-red-100 p-2 rounded'
             }`}
           >
             Your Answer: {userAnswer}
@@ -167,9 +192,26 @@ function AnswerQuestions() {
           <p className="mt-2">
             Correct Answer: {currentQuestion.answer}
           </p>
+          {correct === false && (
+            <button
+              onClick={handleExplanationClick}
+              className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mt-2"
+            >
+              Explanation
+            </button>
+          )}
         </div>
       )}
-     {/* <p>Score: {score}</p>*/}
+
+      {isExplanationOpen && currentQuestion && (
+        <ExplanationModal
+          isOpen={isExplanationOpen}
+          onClose={handleCloseExplanation}
+          question={currentQuestion.text}
+          answer={currentQuestion.answer}
+        />
+      )}
+      {/* <p>Score: {score}</p>*/}
     </div>
   );
 }
