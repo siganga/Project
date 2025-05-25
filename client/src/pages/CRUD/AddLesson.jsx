@@ -84,6 +84,11 @@ const AddLesson = () => {
                                             Add Question
                                         </button>
                                     </Link>
+                                    <Link to={`/change-assets/${lesson._id}`}>
+                                    <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm">
+                                                    Change Assets
+                                    </button>
+                                    </Link>
                                 </div>
                             </li>
                         ))}

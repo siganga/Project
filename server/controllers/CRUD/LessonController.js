@@ -112,4 +112,31 @@ const deleteLesson  = async (req, res) => {
 };
 
 
-module.exports = {getLessons,  createLesson, deleteLesson, getLessonById }
+// Controller to update the asset fields of a lesson
+const updateLessonAssets = async (req, res) => {
+  try {
+    const lesson = await Lesson.findByIdAndUpdate(
+      req.params.id,
+      {
+        heroIdleImage: req.body.heroIdleImage,
+        heroAttackImage: req.body.heroAttackImage,
+        heroHurtImage: req.body.heroHurtImage,
+        monsterIdleImage: req.body.monsterIdleImage,
+        monsterAttackImage: req.body.monsterAttackImage,
+        monsterHurtImage: req.body.monsterHurtImage,
+        backgroundImage: req.body.backgroundImage,
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!lesson) {
+      return res.status(404).json({ message: 'Lesson not found' });
+    }
+
+    res.json(lesson);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = { getLessons, createLesson, deleteLesson, getLessonById, updateLessonAssets };

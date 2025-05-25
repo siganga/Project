@@ -25,7 +25,8 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
   const [questionAnswered, setQuestionAnswered] = useState(false);
   const [isExplanationOpen, setIsExplanationOpen] = useState(false); // State for the explanation modal
   const [explanation, setExplanation] = useState(''); // State to hold the explanation
-
+  const [lessonData, setLessonData] = useState(null);
+  
   const user = useSelector((state) => state.auth.user) || "";
   const userId = user ? user.userId : null;
 
@@ -39,7 +40,11 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
 
     fetch(`http://localhost:5000/api/lessons/${lessonId}`)
       .then(res => res.json())
-      .then(lessonData => setLessonTitle(lessonData.title));
+      //.then(lessonData => setLessonTitle(lessonData.title));
+      .then(data => {
+        setLessonData(data); // Store the entire lesson data
+        setLessonTitle(data.title);
+      });
   }, [lessonId]);
 
   const handleAttackAnimation = async (isCorrect) => {
@@ -148,6 +153,7 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
         isAttacking={isAttacking}
         isMonsterAttacking={isMonsterAttacking}
         score={score}
+        lesson={lessonData} 
       />
       <h1 className="text-2xl font-bold mb-4">{lessonTitle} Question {currentQuestionIndex + 1} of {questions.length}</h1>
       <p className="mb-2">{currentQuestion.text}</p>

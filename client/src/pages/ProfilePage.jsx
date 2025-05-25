@@ -44,6 +44,11 @@ const ProfilePage = () => {
     navigate('/login');
   };
 
+
+  const handleSignUpAsAdminClick = () => {
+    navigate('/signup-admin'); 
+};
+
     return (
         <div className="flex-1 overflow-auto relative z-10 p-6">
             <ul className="space-y-2">
@@ -67,6 +72,14 @@ const ProfilePage = () => {
                 Log In
               </button>
             </li>
+            <li>
+              <button
+                    onClick={handleSignUpAsAdminClick}
+                        className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+                                 >
+                        Sign Up as Admin
+                </button>
+                </li>
                     </>
                 )}
 

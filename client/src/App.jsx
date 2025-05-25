@@ -26,6 +26,7 @@ import LessonPage from "./pages/LessonPage";
 //
 import Signup from "./pages/Signup";// ./pages/authentication/Signup 
 import Login from "./pages/Login";// ./pages/authentication/Login 
+import AdminSignUp from "./pages/authentication/AdminSignUp";
 import ProfilePage from "./pages/ProfilePage";
 import ShareClassroomPage from './pages/ShareClassroomPage';
 import ScoresPage from './pages/ScoresPage';
@@ -39,6 +40,10 @@ import GeminiPromptPage from './pages/GeminiPromptPage';
 import ClassroomUsersPage from './pages/secondary-pages/ClassroomUsersPage.jsx';
 import UploadAsset from './pages/secondary-pages/UploadAsset.jsx';
 import AssetList from './pages/secondary-pages/AssetList.jsx';
+import ChangeLessonAssets from './pages/secondary-pages/ChangeLessonAssets.jsx';
+
+
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 
 
 
@@ -112,6 +117,7 @@ const shouldShowSidebar = !noSidebarPaths.includes(location.pathname) &&
 
 				<Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup-admin" element={<AdminSignUp />} />       
         <Route path="/profile" element={<ProfilePage />} />
 
 
@@ -127,7 +133,13 @@ const shouldShowSidebar = !noSidebarPaths.includes(location.pathname) &&
 
 			<Route path="/upload-asset" element={<UploadAsset />} />
 			<Route path="/assets" element={<AssetList />} />
-				
+			<Route path="/change-assets/:lessonId" element={<ChangeLessonAssets />} />
+
+
+			<Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+
+			
 
 
 

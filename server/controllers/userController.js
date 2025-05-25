@@ -24,8 +24,8 @@ const   loginUser =  async (req, res) => {
 }
 
 const signupUser = async (req, res) => {
-  const {name, email, password, role } = req.body; 
-
+  const {name, email, password } = req.body; 
+  const role = 'user'
   try {
     const user = await UserThree.signup(name,email, password, role); 
     const token = createToken(user._id);
@@ -46,9 +46,9 @@ const   signupAdmin = async (req, res) => {
 				return res.status(401).json({ message: 'Invalid access code' });
 			}
 
-        const user = await UserThree.signup(email, password, role)
+        const user = await UserThree.signup(name, email, password, role)
         const token = createToken(user._id)
-        res.status(200).json({email, token, userId: user._id, role: user.role})
+        res.status(200).json({name, email, token, userId: user._id, role: user.role})
     }catch(error){
         res.json({error: error.message})
     }

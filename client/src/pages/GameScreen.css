@@ -6,18 +6,16 @@
   padding: 20px;
   margin-bottom: 20px;
   position: relative;
-  background-image: url('/img/game-background.png'); /*  background image  */
   background-size: cover; /* Cover the entire container */
   background-repeat: no-repeat; /* Prevent image repetition */
   background-position: center; /* Center the image */
   min-height: 250px; /* minimum height  */
 }
 
-
 .life-display {
   position: absolute; /* Positions the life displays */
   font-size: 20px; /* Adjusts font size */
-  padding: 5px 10px; /*  padding */
+  padding: 5px 10px; /* padding */
   background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
   border-radius: 5px; /* Adds rounded corners */
 }
@@ -29,11 +27,8 @@
 
 .top-right {
   top: 20px; /* Adjusts top position  */
-  right: 20px; /* Adjusst right position  */
+  right: 20px; /* Adjusst right position   */
 }
-
-
-
 
 .character-container {
   display: flex; /* Use flexbox for character content */
@@ -42,12 +37,11 @@
 }
 
 .character-image {
-  height:100px  ; /* Adjust as needed originally  100px   350px*/  
+  height: 100px; /* Adjust as needed originally   100px    350px*/
   width: 100px; /* Adjust as needed */
-  margin-top: 170px; /* Space between lives and image     */ 
-     /*   transform: translateY(30px); Alternative to margin-top*/  
+  margin-top: 170px; /* Space between lives and image       */
+  /* transform: translateY(30px); Alternative to margin-top*/
 }
-
 
 /* New: Flip the monster image horizontally */
 .monster-image {
@@ -63,27 +57,19 @@
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */
   top: 10%; /* Adjust level of level gif */
-    transform: translateY(-50%); /* Center vertically */
+  transform: translateY(-50%); /* Center vertically */
 }
 
-.life-display { /* Style for the life display */
+.life-display {
+  /* Style for the life display */
   margin-bottom: 10px; /* Space between lives and image */
 }
-
-
-
-
-
-
-
-
 
 .animate-hurt {
   animation: hurt 0.5s ease-in-out;
   position: absolute;
-
   top: 10%; /* Adjusts level of hurt gif */
-    transform: translateY(-50%); /* Center vertically */
+  transform: translateY(-50%); /* Center vertically */
 }
 
 @keyframes hurt {
@@ -98,50 +84,33 @@
   }
 }
 
-
-
-
-
 .hero-attack-position {
-    right: 30%; /* Value adjusts final position */
+  right: 30%; /* Value adjusts final position */
 }
 
 .monster-attack-position {
-    left: 28%; /* Value adjusts final position */
+  left: 28%; /* Value adjusts final position */
 }
 
-@keyframes attack {
-    0% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(20px); /* Value adjusts for mid-animation movement */
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-/* 
 @keyframes attack {
   0% {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(20px); /* Adjust distance as needed 
+    transform: translateX(20px); /* Value adjusts for mid-animation movement */
   }
   100% {
     transform: translateX(0);
   }
-}*/
+}
 
-.score-display{
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 20px;
-    padding: 5px 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
+.score-display {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
 }
