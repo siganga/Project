@@ -33,11 +33,11 @@ const userSchema = new Schema({
     type: Boolean,
     default: false
   },
-    streak: { // Add streak field
+    streak: { // 
         type: Number,
         default: 0
     },
-    lastScoreSaveDate: { // Add last score save date field
+    lastScoreSaveDate: { // 
         type: Date,
         default: null
     }

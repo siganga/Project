@@ -2,11 +2,11 @@
 const Asset = require('../../models/Other/assetModel');
 const multer = require('multer');
 
-// Configure multer for memory storage
+// Configuration of multer for memory storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Controller to create a new asset
+//  create a new asset
 const createAsset = async (req, res) => {
   upload.single('image')(req, res, async (err) => {
     if (err) {
@@ -34,7 +34,7 @@ const createAsset = async (req, res) => {
   });
 };
 
-// Controller to get all assets
+// get all assets
 const getAllAssets = async (req, res) => {
   try {
     const assets = await Asset.find();
@@ -44,7 +44,7 @@ const getAllAssets = async (req, res) => {
   }
 };
 
-// Controller to get a specific asset by name
+//  get a specific asset by name
 const getAssetByName = async (req, res) => {
   try {
     const asset = await Asset.findOne({ name: req.params.name });
@@ -59,7 +59,7 @@ const getAssetByName = async (req, res) => {
   }
 };
 
-// Controller to update an existing asset (can update image or type)
+// update an existing asset (can update image or type)
 const updateAsset = async (req, res) => {
   upload.single('image')(req, res, async (err) => {
     if (err) {
@@ -88,7 +88,7 @@ const updateAsset = async (req, res) => {
   });
 };
 
-// Controller to delete an asset by name
+//  delete an asset by name
 const deleteAsset = async (req, res) => {
   try {
     const asset = await Asset.findOneAndDelete({ name: req.params.name });

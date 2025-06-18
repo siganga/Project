@@ -8,13 +8,13 @@ function HomePage() {
     const userName = user ? user.name : 'Guest'; // Default to 'Guest' if no user
 
     return (
-        <div className="flex-1 overflow-auto relative z-10 p-6 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center justify-center">
+        <div className="flex-1 overflow-auto relative z-10 p-6 bg-blue-1200 min-h-screen flex flex-col items-center justify-center">
             <div className="max-w-4xl w-full text-center p-8 bg-white rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-105">
                 <h1 className="text-5xl font-extrabold text-gray-900 mb-4 animate-fade-in-down">
                     Welcome, {userName}!
                 </h1>
                 <p className="text-xl text-gray-700 mb-8 animate-fade-in-up">
-                    Your journey to knowledge and growth starts here.
+                    We hope you have  a great time.
                 </p>
 
                 {/* Container for UserStreak and potentially other dynamic content */}

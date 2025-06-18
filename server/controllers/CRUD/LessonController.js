@@ -8,10 +8,10 @@ const path = require('path');
 
 
 //////////
-// Configure multer for file storage (example: store in 'uploads' directory) ***
+// multer configuration for file storage 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../../uploads/lessons')); // Ensure this directory exists
+    cb(null, path.join(__dirname, '../../uploads/lessons')); // the directory
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -83,7 +83,7 @@ const createLesson = async (req, res) => {
 
 
 
-// Get a specific lesson by ID (to include image paths)
+// Gets a specific lesson by ID (to include image paths)
 const getLessonById = async (req, res) => {
   try {
     const lesson = await Lesson.findById(req.params.id);
@@ -112,7 +112,7 @@ const deleteLesson  = async (req, res) => {
 };
 
 
-// Controller to update the asset fields of a lesson
+//  update the asset fields of a lesson
 const updateLessonAssets = async (req, res) => {
   try {
     const lesson = await Lesson.findByIdAndUpdate(

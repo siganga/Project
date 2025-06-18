@@ -1,108 +1,97 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Logout from './Logout'; //  '../components/authentication/Logout'
+import { Link, useNavigate } from 'react-router-dom'; // Combined Link and useNavigate import
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import Logout from './Logout'; // Ensure this path is correct, e.g., '../components/authentication/Logout'
 
 const ProfilePage = () => {
-    const user = useSelector((state) => state.auth.user) || "";
-    const userEmail = user ? user.email : null;
-    const userName = user ? user.name : null;
-    const userLogged = user ? true : false;
-    const userId = user ? user.userId : null;
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
 
-    let userAdmin = false;
-    let userAuth = false;
+    // Destructure user details with fallback for clarity and direct use
+    const { email: userEmail, name: userName, userId, role: userRole } = user || {};
+    const userLogged = !!user; // Convert user object to a boolean: true if user exists, false otherwise
 
-    if (user.role === 'student') {
-        userAdmin = true;
-    }
+    const handleSignUpClick = () => {
+        navigate('/signup');
+    };
 
-    if (user.role === 'user') {
-        userAuth = true;
-    }
+    const handleLoginClick = () => {
+        navigate('/login');
+    };
 
-/*
- <div>
-                                <span className="font-semibold">User ID:</span> {userId}
-                            </div>
-
-
-<li>
-                    <Link to="/" className="text-blue-600 hover:underline">Home</Link>
-                </li>                            
-*/
-
-
-    const navigate = useNavigate(); // Hook for programmatic navigation
-
-  const handleSignUpClick = () => {
-    navigate('/signup');
-  };
-
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
-
-
-  const handleSignUpAsAdminClick = () => {
-    navigate('/signup-admin'); 
-};
+    const handleSignUpAsAdminClick = () => {
+        navigate('/signup-admin');
+    };
 
     return (
-        <div className="flex-1 overflow-auto relative z-10 p-6">
-            <ul className="space-y-2">
-                
+        <div className="flex-1 overflow-auto relative z-10 p-6 bg-blue-1200 min-h-screen flex flex-col items-center justify-center">
+            <div className="max-w-md  w-full bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    {userLogged ? 'Your Profile' : 'Welcome to the Profile Page!'}
+                </h2>
 
-                {!userLogged && (
-                    <>
-                         <li>
-              <button
-                onClick={handleSignUpClick}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Sign Up
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={handleLoginClick}
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Log In
-              </button>
-            </li>
-            <li>
-              <button
-                    onClick={handleSignUpAsAdminClick}
-                        className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-                                 >
-                        Sign Up as Admin
-                </button>
-                </li>
-                    </>
-                )}
-
-                {userLogged && (
-                    <>
-                        <li className="border rounded p-3">
-                        
-                            <div>
-                                <span className="font-semibold">Name:</span> {userName}
+                {!userLogged ? (
+                    <div className="space-y-4">
+                        <p className="text-gray-600 text-center mb-6">
+                            It looks like you're not logged in. Please sign up or log in to view your profile and access more features.
+                        </p>
+                        <button
+                            onClick={handleSignUpClick}
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 ease-in-out transform hover:scale-105 shadow-md"
+                        >
+                            Sign Up
+                        </button>
+                        <button
+                            onClick={handleLoginClick}
+                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 ease-in-out transform hover:scale-105 shadow-md"
+                        >
+                            Log In
+                        </button>
+                        <button
+                            onClick={handleSignUpAsAdminClick}
+                            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 ease-in-out transform hover:scale-105 shadow-md"
+                        >
+                            Sign Up as Admin
+                        </button>
+                        <p className="text-center text-sm text-gray-500 mt-4">
+                           <Link to="/" className="text-blue-500 hover:underline">Go back to Home</Link>
+                        </p>
+                    </div>
+                ) : (
+                    <div className="space-y-6">
+                        <div className="flex items-center space-x-4 mb-6 pb-4 border-b border-gray-200">
+                            <div className="flex-shrink-0">
+                                {/* Placeholder for user avatar/icon */}
+                                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl font-semibold">
+                                    {userName ? userName.charAt(0).toUpperCase() : 'U'}
+                                </div>
                             </div>
-
                             <div>
-                                <span className="font-semibold">Email:</span> {userEmail}
+                                <h3 className="text-2xl font-semibold text-gray-900">{userName}</h3>
+                                <p className="text-md text-gray-600">{userEmail}</p>                 
+                                 
                             </div>
+                            {/*  <p className="text-sm text-gray-500">Role: <span className="font-medium text-blue-700 capitalize">{userRole}</span></p>. */}
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-lg shadow-inner text-gray-700">
                             
+                            {/* 
+
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="font-medium">User ID:</span>
+                                <span className="text-sm bg-gray-200 px-3 py-1 rounded-md font-mono">{userId}</span>
+                            </div>
+                            */}
                            
-                        </li>
-                        <li>
-                            <Logout />
-                        </li>
-                    </>
+                        </div>
+
+                        <div className="mt-8 pt-4 border-t border-gray-200 flex justify-center">
+                            <Logout className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 ease-in-out transform hover:scale-105 shadow-md" />
+                        </div>
+                    </div>
                 )}
-            </ul>
+            </div>
         </div>
     );
 };

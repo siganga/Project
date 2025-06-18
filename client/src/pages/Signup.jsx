@@ -94,32 +94,7 @@ const Signup = () => {
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Role:</label>
-                    <div className="mt-1 space-y-2">
-                        <label className="inline-flex items-center">
-                            <input
-                                type="radio"
-                                value="student"
-                                checked={role === 'student'}
-                                onChange={() => setRole('student')}
-                                className="form-radio h-5 w-5 text-blue-600"
-                            />
-                            <span className="ml-1 mr-3 text-gray-700">Student</span>
-                        </label>
-                        <label className="inline-flex items-center">
-                            <input
-                                type="radio"
-                                value="teacher"
-                                checked={role === 'teacher'}
-                                onChange={() => setRole('teacher')}
-                                className="form-radio h-5 w-5 text-blue-600"
-                            />
-                            <span className="ml-1 mr-3 text-gray-700">Teacher</span>
-                        </label>
-                    </div>
-                </div>
-
+                
                 <button
                     disabled={isLoading}
                     type="submit"
