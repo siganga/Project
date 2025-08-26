@@ -19,7 +19,7 @@ const LessonPage = () => {
     }, [unitId]);
 
    const handleBack = () => {
-        navigate(-1); // Navigate back one page in history
+        navigate(-1); 
     };
 
     
@@ -32,7 +32,7 @@ const LessonPage = () => {
             </div>
 
             <div className="mt-4">
-                {/*<h2 className="text-lg font-semibold mb-2">Lessons</h2>*/}
+               
                 {lessons.length > 0 ? (
                     <ul className="space-y-2">
                         {lessons.map(lesson => (

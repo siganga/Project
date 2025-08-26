@@ -6,8 +6,6 @@ import silverTrophy from '../../assets/trophies/silver-trophy.png';
 import goldTrophy from '../../assets/trophies/gold-trophy.png';
 import platinumTrophy from '../../assets/trophies/platinum-trophy.png';
 
-// Assuming StatCard is a component you might have, if not, you can remove it or implement it.
-// import StatCard from '../../components/common/StatCard';
 
 function UserStreak() {
     const [streak, setStreak] = useState(null);
@@ -31,7 +29,7 @@ function UserStreak() {
                     setStreak(data.streak);
                     setLoading(false);
 
-                    // Determine trophy image
+                    // Determines trophy image
                     if (data.streak >= 183) {
                         setTrophyImage(platinumTrophy);
                     } else if (data.streak >= 91) {
@@ -50,7 +48,7 @@ function UserStreak() {
                 });
         } else {
             setLoading(false);
-            setError('User not logged in'); // Or handle this by not showing the component
+            setError('User not logged in'); 
         }
     }, [userId]);
 
@@ -71,13 +69,13 @@ function UserStreak() {
         );
     }
 
-    // Don't render if no streak and no error
+   
     if (streak === null && !error) {
         return (
             <div className="p-6 bg-gray-50 rounded-lg shadow-md text-gray-700 text-center h-48 flex flex-col items-center justify-center">
                 <p className="text-lg font-semibold mb-2">Welcome!</p>
                 <p>Log in to track your streak.</p>
-                {/* You might want a login button here */}
+                
             </div>
         );
     }

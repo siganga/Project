@@ -9,7 +9,7 @@ function GameScreen({
   isAttacking,
   isMonsterAttacking,
   score,
-  lesson, // Expecting the lesson object as a prop
+  lesson, 
 }) {
   const [animation, setAnimation] = useState(null);
   const [heroHurt, setHeroHurt] = useState(false);
@@ -96,11 +96,11 @@ function GameScreen({
     }
 
     loadImages();
-  }, [lesson]); // Re-run when the 'lesson' prop changes
+  }, [lesson]); 
 
   const getHeroImage = async (state, imageName) => {
     if (!imageName) {
-      return '/img/hero-idle.gif'; // Default fallback
+      return '/img/hero-idle.gif';
     }
     try {
       const response = await fetch(`http://localhost:5000/api/assets/${imageName}`);
@@ -109,11 +109,11 @@ function GameScreen({
         return URL.createObjectURL(blob);
       } else {
         console.error(`Failed to fetch hero image: ${imageName}`);
-        return '/img/hero-idle.gif'; // Default fallback on error
+        return '/img/hero-idle.gif'; 
       }
     } catch (error) {
       console.error('Error fetching hero image:', error);
-      return '/img/hero-idle.gif'; // Default fallback on error
+      return '/img/hero-idle.gif'; 
     }
   };
 

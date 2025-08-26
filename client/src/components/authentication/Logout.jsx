@@ -15,7 +15,7 @@ function Logout() {
         
         dispatch(logout());
         localStorage.removeItem('auth');
-        navigate('/');
+        navigate('/home');
          
     
       }

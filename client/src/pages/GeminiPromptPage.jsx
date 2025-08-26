@@ -6,10 +6,10 @@ function GeminiPromptPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Replace with your actual API key
+
   const API_KEY = 'AIzaSyCEazmFuhYFPTPGb02tlXRynEo7dH_nGa8';
 
-  // Encoded prompt (replace with your desired prompt)
+
   const encodedPrompt = btoa("Write a sonnet about a programmers life, but also make it rhyme.");
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function GeminiPromptPage() {
     };
 
     runGemini();
-  }, [encodedPrompt, API_KEY]); // Re-run if prompt or API key changes
+  }, [encodedPrompt, API_KEY]); 
 
   return (
     <div className='z-10'>

@@ -129,7 +129,7 @@ const handleSaveAssets = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10 p-6">
-      <h1 className="text-2xl font-semibold mb-4">Change Assets for Lesson: {lesson.title}</h1>
+      <h1 className="text-2xl font-semibold mb-4">Change Assets for Lesson ({lesson.title})</h1>
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Hero Images</h2>
@@ -141,6 +141,7 @@ const handleSaveAssets = () => {
               value={selectedHeroIdleAsset}
               onChange={(e) => handleAssetChange('heroIdle', e.target.value)}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              style={{ color: 'black' }}
             >
               <option value="">Default</option>
               {availableHeroIdleAssets.map(asset => (
@@ -157,6 +158,7 @@ const handleSaveAssets = () => {
               value={selectedHeroAttackAsset}
               onChange={(e) => handleAssetChange('heroAttack', e.target.value)}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              style={{ color: 'black' }}
             >
               <option value="">Default</option>
               {availableHeroAttackAssets.map(asset => (
@@ -172,6 +174,7 @@ const handleSaveAssets = () => {
               value={selectedHeroHurtAsset}
               onChange={(e) => handleAssetChange('heroHurt', e.target.value)}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              style={{ color: 'black' }}
             >
               <option value="">Default</option>
               {availableHeroHurtAssets.map(asset => (
@@ -194,6 +197,7 @@ const handleSaveAssets = () => {
               value={selectedMonsterIdleAsset}
               onChange={(e) => handleAssetChange('monsterIdle', e.target.value)}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              style={{ color: 'black' }}
             >
               <option value="">Default</option>
               {availableMonsterIdleAssets.map(asset => (
@@ -209,6 +213,7 @@ const handleSaveAssets = () => {
               value={selectedMonsterAttackAsset}
               onChange={(e) => handleAssetChange('monsterAttack', e.target.value)}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              style={{ color: 'black' }}
             >
               <option value="">Default</option>
               {availableMonsterAttackAssets.map(asset => (
@@ -224,6 +229,7 @@ const handleSaveAssets = () => {
               value={selectedMonsterHurtAsset}
               onChange={(e) => handleAssetChange('monsterHurt', e.target.value)}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              style={{ color: 'black' }}
             >
               <option value="">Default</option>
               {availableMonsterHurtAssets.map(asset => (
@@ -244,6 +250,7 @@ const handleSaveAssets = () => {
             value={selectedBackgroundAsset}
             onChange={(e) => handleAssetChange('background', e.target.value)}
             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            style={{ color: 'black' }}
           >
             <option value="">Default</option>
             {availableBackgroundAssets.map(asset => (

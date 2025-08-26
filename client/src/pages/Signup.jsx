@@ -103,11 +103,14 @@ const Signup = () => {
                     {isLoading ? 'Signing Up...' : 'Sign Up'}
                 </button>
 
-                <Link to="/login">
+                <Link to="/home">
                     <button className="mt-4  w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                        Log In
+                        Go Back
                     </button>
                 </Link>
+
+
+                 
 
                 {error && <div className="mt-4 text-red-500">{error}</div>}
             </form>

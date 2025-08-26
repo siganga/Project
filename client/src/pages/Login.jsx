@@ -91,9 +91,9 @@ const Login = () => {
                     {isLoading ? 'Logging In...' : 'Log In'}
                 </button>
 
-                <Link to="/signup">
+                <Link to="/home">
                     <button className="mt-4  w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                        Sign Up
+                        Go Back
                     </button>
                 </Link>
 

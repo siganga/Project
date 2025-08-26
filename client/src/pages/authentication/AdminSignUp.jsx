@@ -122,14 +122,14 @@ const AdminSignUp = () => {
                 <button
                     disabled={isLoading}
                     type="submit"
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+                    className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
                     {isLoading ? 'Signing Up Admin...' : 'Sign Up as Admin'}
                 </button>
 
-                <Link to="/login">
-                    <button className="mt-4 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                        Login
+                <Link to="/home">
+                    <button className="mt-4  w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Go Back
                     </button>
                 </Link>
 

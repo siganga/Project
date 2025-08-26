@@ -1,15 +1,13 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Combined Link and useNavigate import
-import { useSelector } from 'react-redux';
-import Logout from './Logout'; // Ensure this path is correct, e.g., '../components/authentication/Logout'
-
+import { Link, useNavigate } from 'react-router-dom'; 
+import Logout from './Logout'; 
 const ProfilePage = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
-    // Destructure user details with fallback for clarity and direct use
+   
     const { email: userEmail, name: userName, userId, role: userRole } = user || {};
-    const userLogged = !!user; // Convert user object to a boolean: true if user exists, false otherwise
+    const userLogged = !!user; 
 
     const handleSignUpClick = () => {
         navigate('/signup');
@@ -53,15 +51,13 @@ const ProfilePage = () => {
                         >
                             Sign Up as Admin
                         </button>
-                        <p className="text-center text-sm text-gray-500 mt-4">
-                           <Link to="/" className="text-blue-500 hover:underline">Go back to Home</Link>
-                        </p>
+                        
                     </div>
                 ) : (
                     <div className="space-y-6">
                         <div className="flex items-center space-x-4 mb-6 pb-4 border-b border-gray-200">
                             <div className="flex-shrink-0">
-                                {/* Placeholder for user avatar/icon */}
+                               
                                 <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl font-semibold">
                                     {userName ? userName.charAt(0).toUpperCase() : 'U'}
                                 </div>
@@ -71,19 +67,12 @@ const ProfilePage = () => {
                                 <p className="text-md text-gray-600">{userEmail}</p>                 
                                  
                             </div>
-                            {/*  <p className="text-sm text-gray-500">Role: <span className="font-medium text-blue-700 capitalize">{userRole}</span></p>. */}
+                   
                         </div>
 
                         <div className="bg-gray-50 p-4 rounded-lg shadow-inner text-gray-700">
                             
-                            {/* 
-
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="font-medium">User ID:</span>
-                                <span className="text-sm bg-gray-200 px-3 py-1 rounded-md font-mono">{userId}</span>
-                            </div>
-                            */}
-                           
+                                                       
                         </div>
 
                         <div className="mt-8 pt-4 border-t border-gray-200 flex justify-center">
