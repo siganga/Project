@@ -7,9 +7,8 @@ function ExplanationModal({ isOpen, onClose, question, answer }) {
   const [loadingExplanation, setLoadingExplanation] = useState(false);
   const [error, setError] = useState(null);
 
-  // Replace with your actual API key - IMPORTANT: Consider security implications
-  const API_KEY = 'AIzaSyCEazmFuhYFPTPGb02tlXRynEo7dH_nGa8';// Replace with your actual API key
-
+  
+  const API_KEY = 'AIzaSyCEazmFuhYFPTPGb02tlXRynEo7dH_nGa8';
   useEffect(() => {
     const fetchExplanation = async () => {
       if (isOpen && question && answer) {

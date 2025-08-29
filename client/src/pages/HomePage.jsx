@@ -25,14 +25,16 @@ function HomePage() {
                     </div>
 
                    
-                    <div className="col-span-1 md:col-span-1 lg:col-span-1 w-full max-w-xs p-6 bg-purple-50 rounded-lg shadow-md flex flex-col items-center justify-center animate-fade-in-up delay-200">
+                    <div className="col-span-1 md:col-span-1 lg:col-span-1 w-full max-w-xs p-6 bg-purple-50 rounded-lg shadow-md 
+                    flex flex-col items-center justify-center animate-fade-in-up delay-200">
                          
                         <Link to="/classrooms" className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
                             View Classrooms
                         </Link>
                     </div>
 
-                    <div className="col-span-1 md:col-span-1 lg:col-span-1 w-full max-w-xs p-6 bg-yellow-50 rounded-lg shadow-md flex flex-col items-center justify-center animate-fade-in-up delay-400">
+                    <div className="col-span-1 md:col-span-1 lg:col-span-1 w-full max-w-xs p-6 bg-yellow-50 rounded-lg shadow-md 
+                    flex flex-col items-center justify-center animate-fade-in-up delay-400">
                        
                         <Link to="/profile" className="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors">
                             Your Profile

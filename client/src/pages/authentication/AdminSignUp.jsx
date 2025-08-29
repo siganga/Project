@@ -77,7 +77,7 @@ const AdminSignUp = () => {
                         id="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border rounded-md text-black"
                         required
                     />
                 </div>
@@ -89,7 +89,7 @@ const AdminSignUp = () => {
                         id="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border rounded-md text-black"
                         required
                     />
                 </div>
@@ -101,7 +101,7 @@ const AdminSignUp = () => {
                         id="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border rounded-md text-black"
                         required
                     />
                 </div>
@@ -110,11 +110,11 @@ const AdminSignUp = () => {
                 <div className="mb-4">
                     <label htmlFor="accessCode" className="block text-sm font-medium text-gray-700">Admin Access Code:</label>
                     <input
-                        type="text" // Or "password" if you want to hide it
+                        type="password" // Or "password" if you want to hide it
                         id="accessCode"
                         value={accessCode}
                         onChange={(event) => setAccessCode(event.target.value)}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border rounded-md text-black"
                         required
                     />
                 </div>

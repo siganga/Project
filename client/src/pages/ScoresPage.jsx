@@ -26,11 +26,11 @@ const ScoresPage = () => {
   return (
     <div className="flex flex-col flex-1 overflow-auto relative z-10 p-6">
       <button
-                    onClick={handleBack}
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                >
-                    Back
-                </button>
+        onClick={handleBack}
+        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded absolute top-2 right-2"
+      >
+        Back
+      </button>
       <h2 className="text-2xl font-semibold mb-4 text-gray-100">
           Leaderboard
       </h2>

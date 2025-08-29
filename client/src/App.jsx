@@ -43,6 +43,7 @@ function App() {
   const noSidebarPaths = [
     '/ans-questions/:lessonId',
     '/home',
+    '/access',
     "/login",
     "/signup",
     "/signup-admin"
@@ -65,6 +66,7 @@ function App() {
             {/* Public Routes - Accessible to everyone */}
             
             <Route path='/home' element={<ProfilePage />} />
+            <Route path='/access' element={<ProfilePage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup-admin" element={<AdminSignUp />} />
