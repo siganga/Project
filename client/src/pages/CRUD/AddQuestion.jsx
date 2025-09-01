@@ -47,7 +47,7 @@ const AddQuestion = () => {
     return (
         <div className="flex-1 overflow-auto relative z-10 p-6">
             <div className="mb-4">
-                <h1 className="text-2xl font-semibold mb-2">{lessonTitle} Add Question</h1>
+                <h1 className="text-2xl font-semibold mb-2">Lesson: {lessonTitle} </h1>
                 <div className="space-y-2">
                     <input
                         type="text"

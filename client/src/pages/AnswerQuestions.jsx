@@ -155,7 +155,7 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
         score={score}
         lesson={lessonData} 
       />
-      <h1 className="text-2xl font-bold mb-4">{lessonTitle} Question {currentQuestionIndex + 1} of {questions.length}</h1>
+      <h1 className="text-2xl font-bold mb-4">{lessonTitle}: Question {currentQuestionIndex + 1} of {questions.length}</h1>
       <p className="mb-2">{currentQuestion.text}</p>
       <input
         type="text"

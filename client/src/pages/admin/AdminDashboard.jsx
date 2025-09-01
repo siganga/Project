@@ -122,7 +122,7 @@ const AdminDashboard = () => {
     }
 
     return (
-        <div className="flex-1 overflow-auto relative z-10 p-6 bg-gray-100 min-h-screen">
+        <div className="flex-1 overflow-auto relative z-10 p-6 bg-black-100 min-h-screen">
             <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h2>
 
@@ -133,22 +133,9 @@ const AdminDashboard = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     {/* Quick Actions Card */}
-                    <div className="bg-green-50 p-6 rounded-lg shadow">
-                        <h4 className="text-lg font-semibold text-green-800 mb-3">Admin Actions</h4>
-                        <ul className="space-y-2">
-                            <li>
-                                <Link
-                                    to="/signup/admin"
-                                    className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition duration-200"
-                                >
-                                    Create New Admin Account
-                                </Link>
-                            </li>
-                            {/* Add more general admin specific actions here */}
-                        </ul>
-                    </div>
+                    
 
-                    {/* Asset Management Card (NEW SECTION) */}
+                    {/* Asset Management Card (*/}
                     <div className="bg-blue-50 p-6 rounded-lg shadow">
                         <h4 className="text-lg font-semibold text-blue-800 mb-3">Asset Management</h4>
                         <ul className="space-y-2">

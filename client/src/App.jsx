@@ -31,7 +31,7 @@ import { Provider } from 'react-redux';
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((state) => state.auth.user);
   if (!user) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/access" replace />;
   }
   return children;
 };
