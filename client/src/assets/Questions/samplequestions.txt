@@ -29,6 +29,12 @@ Question: What process creates sex cells?
 
 
 
+Q: What is the process by which plants make their food? 
+A: Photosynthesis
+Q: What part of a plant absorbs water and nutrients from the soil? 
+A: Roots
+Q: What are animals that eat both plants and animals called? 
+A: Omnivores
 
 
 
@@ -38,8 +44,14 @@ Question: What process creates sex cells?
 
 
 
+1. Report page
+2. Download Report
+3. Shows how many questions have been gotten
 
-
+Extra
+1. Display questions gotten right in green others in red
+2. Show chart of question gotten wrong
+3. Store reports
 
 
 
@@ -84,5 +96,30 @@ johntester@gmail.com
 
 
 
+const API_KEY = 'AIzaSyCEazmFuhYFPTPGb02tlXRynEo7dH_nGa8';
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+API key 2
+AIzaSyDMImaEK2B_weiWtKVmYo_iLOdna7XgCB8
 

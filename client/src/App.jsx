@@ -21,6 +21,7 @@ import GeminiPromptPage from './pages/GeminiPromptPage';
 import ClassroomUsersPage from './pages/secondary-pages/ClassroomUsersPage.jsx';
 import UploadAsset from './pages/secondary-pages/UploadAsset.jsx';
 import AssetList from './pages/secondary-pages/AssetList.jsx';
+import Reports from './pages/secondary-pages/Reports.jsx';
 import ChangeLessonAssets from './pages/secondary-pages/ChangeLessonAssets.jsx';
 import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 import { store, persistor } from './redux/store';
@@ -88,6 +89,7 @@ function App() {
             <Route path="/classrooms/:id/users" element={<ProtectedRoute><ClassroomUsersPage /></ProtectedRoute>} />
             <Route path="/upload-asset" element={<ProtectedRoute><UploadAsset /></ProtectedRoute>} />
             <Route path="/assets" element={<ProtectedRoute><AssetList /></ProtectedRoute>} />
+            <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
             <Route path="/change-assets/:lessonId" element={<ProtectedRoute><ChangeLessonAssets /></ProtectedRoute>} />
             <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
 

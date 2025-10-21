@@ -4,8 +4,8 @@
  import { useParams, useNavigate } from 'react-router-dom';
  import GameScreen from './GameScreen';
  import { useSelector } from 'react-redux';
- import ExplanationModal from './ExplanationModal'; // Import the explanation modal
-import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new answer checker component
+ import ExplanationModal from './ExplanationModal'; // explanation modal
+import AnswerChecker from './secondary-pages/AnswerChecker'; //  answer checker component
 
  function AnswerQuestions() {
   const { lessonId } = useParams();
@@ -15,7 +15,7 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
   const [userAnswer, setUserAnswer] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [correct, setCorrect] = useState(null);
-  const [isCheckingAnswer, setIsCheckingAnswer] = useState(false); // New state for checking status
+  const [isCheckingAnswer, setIsCheckingAnswer] = useState(false); // State  checks for status
   const [lessonTitle, setLessonTitle] = useState('');
   const [heroLives, setHeroLives] = useState(3);
   const [monsterLives, setMonsterLives] = useState(0);
@@ -27,6 +27,8 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
   const [explanation, setExplanation] = useState(''); // State to hold the explanation
   const [lessonData, setLessonData] = useState(null);
   
+  const [history, setHistory] = useState([]); 
+
   const user = useSelector((state) => state.auth.user) || "";
   const userId = user ? user.userId : null;
 
@@ -60,6 +62,56 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
       setHeroLives(prev => prev - 1);
     }
   };
+  ////////
+
+
+  //  Handles score saving and redirection to reports page
+  const handleQuizEnd = async (finalScore) => {
+    const totalQuestions = questions.length;
+    const correctAnswers = finalScore;
+
+      let percentageScore = 0;
+    if (totalQuestions > 0) {
+        // Calculate percentage, multiply by 100, and round to the nearest integer
+        percentageScore = Math.round((correctAnswers / totalQuestions) * 100);
+    }
+
+    if (userId) {
+      try {
+        // Save the score to the backend
+        const response = await fetch('http://localhost:5000/api/scores', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+            lessonId: lessonId,
+            score: percentageScore, 
+          }),
+        });
+        
+        if (response.ok) {
+          console.log("Final score saved successfully!");
+        } else {
+          console.error("Failed to save final score.");
+        }
+      } catch (error) {
+        console.error('Error saving final score:', error);
+      }
+    }
+    
+    // Redirect to the reports page, passing score data in state
+    navigate('/reports', { 
+      state: { 
+        correct: correctAnswers, 
+        total: totalQuestions,
+        lessonTitle: lessonTitle,
+        history: history,
+         lessonId: lessonId
+      } 
+    });
+  };
 
   const handleNextQuestion = async () => {
     if (currentQuestionIndex < questions.length - 1) {
@@ -72,32 +124,7 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
       setIsExplanationOpen(false); // Close explanation modal on next question
       setExplanation(''); // Clear any previous explanation
     } else {
-      if (userId) {
-        try {
-          const response = await fetch('http://localhost:5000/api/scores', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              userId: userId,
-              lessonId: lessonId,
-              score: score,
-            }),
-          });
-          if (response.ok) {
-            alert(`You have reached the end of the questions. Your final score is: ${score}. Score saved!`);
-          } else {
-            alert(`You have reached the end of the questions. Your final score is: ${score}. Failed to save score.`);
-          }
-        } catch (error) {
-          console.error('Error saving score:', error);
-          alert(`You have reached the end of the questions. Your final score is: ${score}. Failed to save score.`);
-        }
-      } else {
-        alert(`You have reached the end of the questions. Your final score is: ${score}. User not logged in. Score not saved.`);
-      }
-      navigate(`/`);
+      handleQuizEnd(score);
     }
   };
 
@@ -121,13 +148,26 @@ import AnswerChecker from './secondary-pages/AnswerChecker'; // Import the new a
       setScore(prevScore => prevScore + 1);
     }
 
+    setHistory(prevHistory => [
+      ...prevHistory,
+      {
+        text: currentQuestion.text,
+        correctAnswer: currentQuestion.answer,
+        userAnswer: userAnswer,
+        isCorrect: isCorrect,
+      }
+    ]);
+
     if (monsterLives <= 1 && isCorrect) {
       alert(`Congratulations! You've defeated the monster! Your final score is: ${score}`);
-      navigate(`/`);
+     handleQuizEnd(currentScore); 
+      return; 
     }
     if (heroLives <= 1 && !isCorrect) {
       alert(`Game Over! The monster has defeated you! Your final score is: ${score}`);
-      navigate(`/`);
+      handleQuizEnd(currentScore); 
+      return;
+
     }
   };
 

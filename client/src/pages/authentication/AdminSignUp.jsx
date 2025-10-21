@@ -127,7 +127,7 @@ const AdminSignUp = () => {
                     {isLoading ? 'Signing Up Admin...' : 'Sign Up as Admin'}
                 </button>
 
-                <Link to="/home">
+                <Link to="/access">
                     <button className="mt-4  w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                         Go Back
                     </button>

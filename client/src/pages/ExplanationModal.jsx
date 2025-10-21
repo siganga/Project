@@ -8,7 +8,7 @@ function ExplanationModal({ isOpen, onClose, question, answer }) {
   const [error, setError] = useState(null);
 
   
-  const API_KEY = 'AIzaSyCEazmFuhYFPTPGb02tlXRynEo7dH_nGa8';
+  const API_KEY = 'AIzaSyDMImaEK2B_weiWtKVmYo_iLOdna7XgCB8';
   useEffect(() => {
     const fetchExplanation = async () => {
       if (isOpen && question && answer) {

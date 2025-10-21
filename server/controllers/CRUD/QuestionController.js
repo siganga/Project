@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 // Get questions for a lesson
 const getQuestions  = async (req, res) => {
   try {
-    const questions = await Question.find({ lesson: req.params.lessonId }); // Assuming you have a 'lesson' field in Question model
+    const questions = await Question.find({ lesson: req.params.lessonId }); // 
     res.json(questions);
   } catch (err) {
     res.status(500).json({ message: err.message });

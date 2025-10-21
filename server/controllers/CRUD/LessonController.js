@@ -33,53 +33,48 @@ const upload = multer({ storage: storage }).fields([
 
 // Get lessons for a unit
 
-const getLessons  = async (req, res) => {
+const getLessons = async (req, res) => {
   try {
-    const lessons = await Lesson.find({ unit: req.params.unitId }); // Assuming you have a 'unit' field in Lesson model
-    res.json(lessons);
+    const lessons = await Lesson.find({ unit: req.params.unitId }); 
+    res.status(200).json(lessons);  // 
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
 
+
 // Create a new lesson
 
 const createLesson = async (req, res) => {
-  upload(req, res, async (err) => {
-    if (err) {
-      return res.status(500).json({ message: 'Error uploading files', error: err });
+  const { title, unitId } = req.body;
+
+  if (!title || !unitId) {
+    return res.status(400).json({ message: "Title and unitId are required" });
+  }
+
+  try {
+    // Ensure the unit exists
+    const unit = await Unit.findById(unitId);
+    if (!unit) {
+      return res.status(404).json({ message: "Unit not found" });
     }
 
-    const lessonData = {
-      title: req.body.title,
-      unit: req.body.unitId,
-    };
+    // Create the lesson
+    const lesson = new Lesson({ title, unit: unitId });
+    const newLesson = await lesson.save();
 
-    if (req.files['heroIdleImage']) lessonData.heroIdleImage = `/uploads/lessons/${req.files['heroIdleImage'][0].filename}`;
-    if (req.files['heroAttackImage']) lessonData.heroAttackImage = `/uploads/lessons/${req.files['heroAttackImage'][0].filename}`;
-    if (req.files['heroHurtImage']) lessonData.heroHurtImage = `/uploads/lessons/${req.files['heroHurtImage'][0].filename}`;
-    if (req.files['monsterIdleImage']) lessonData.monsterIdleImage = `/uploads/lessons/${req.files['monsterIdleImage'][0].filename}`;
-    if (req.files['monsterAttackImage']) lessonData.monsterAttackImage = `/uploads/lessons/${req.files['monsterAttackImage'][0].filename}`;
-    if (req.files['monsterHurtImage']) lessonData.monsterHurtImage = `/uploads/lessons/${req.files['monsterHurtImage'][0].filename}`;
-    if (req.files['backgroundImage']) lessonData.backgroundImage = `/uploads/lessons/${req.files['backgroundImage'][0].filename}`;
+    // Add the lesson to the unit's lesson list
+    unit.lessons.push(newLesson._id);
+    await unit.save();
 
-    const lesson = new Lesson(lessonData);
-
-    try {
-      const newLesson = await lesson.save();
-      const unit = await Unit.findById(req.body.unitId);
-      if (!unit) {
-        return res.status(404).json({ message: "Unit not found" });
-      }
-      unit.lessons.push(newLesson._id);
-      await unit.save();
-      res.status(201).json(newLesson);
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
-  });
+    res.status(201).json(newLesson);
+  } catch (err) {
+    console.error("Error creating lesson:", err);
+    res.status(500).json({ message: "Failed to create lesson", error: err.message });
+  }
 };
+
 
 
 

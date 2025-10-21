@@ -26,7 +26,7 @@ const ProfilePage = () => {
         <div className="flex-1 overflow-auto relative z-10 p-6 bg-blue-1200 min-h-screen flex flex-col items-center justify-center">
             <div className="max-w-md  w-full bg-white p-8 rounded-lg shadow-xl border border-gray-200">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    {userLogged ? 'Your Profile' : 'Welcome to the Profile Page!'}
+                    {userLogged ? 'Your Profile' : 'Welcome to the Access Page!'}
                 </h2>
 
                 {!userLogged ? (

@@ -43,7 +43,7 @@
   /* transform: translateY(30px); Alternative to margin-top*/
 }
 
-/* New: Flip the monster image horizontally */
+
 .monster-image {
   transform: scaleX(-1); /* Flips the image horizontally */
 }
@@ -51,8 +51,8 @@
 .animate-attack {
   animation: attack 0.5s ease-in-out;
   position: absolute; /* Needed for proper animation positioning */
-  /* You might need to adjust top/left/right properties here depending on your image sizes and layout */
-  /* Example: */
+  /*  */
+  /*  */
   /* top: 50%; */
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */

@@ -2,13 +2,13 @@
 
  import { GoogleGenerativeAI } from "@google/generative-ai";
 
- // Replace with your actual API key - IMPORTANT: Consider security implications
- const API_KEY = 'AIzaSyCEazmFuhYFPTPGb02tlXRynEo7dH_nGa8'; // Replace with your actual API key
+ // 
+ const API_KEY = 'AIzaSyDMImaEK2B_weiWtKVmYo_iLOdna7XgCB8'; // 
 
  const AnswerChecker = async (question, userAnswer, correctAnswer) => {
   try {
     const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // Using a more capable model
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // 
 
     const prompt = `Determine if the following user answer to the question "<span class="math-inline">\{question\}" is correct, even if it's not an exact match to the provided correct answer "</span>{correctAnswer}". Consider minor variations in punctuation, capitalization, and phrasing that still convey the same meaning. Respond with "true" if the user answer is correct or "false" if it is incorrect.
 
@@ -29,7 +29,7 @@
     }
   } catch (error) {
     console.error('Error calling Gemini API for answer checking:', error);
-    return false; // Assume incorrect if there's an error
+    return false; // 
   }
  };
 
