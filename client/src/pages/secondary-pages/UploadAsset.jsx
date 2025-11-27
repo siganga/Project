@@ -1,6 +1,6 @@
 // frontend/components/UploadAsset.js
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 /*
 
@@ -134,7 +134,13 @@ const UploadAsset = () => {
           >
             {uploading ? 'Uploading...' : 'Upload Asset'}
           </button>
+
         </div>
+         <Link to="/assets">
+                    <button className="mt-4   bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                       Go to Asset List
+                    </button>
+                </Link>
       </form>
       
     </div>

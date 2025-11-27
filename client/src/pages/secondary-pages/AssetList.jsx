@@ -28,6 +28,32 @@ const AssetList = () => {
     fetchAssets();
   }, []);
 
+const handleDeleteAsset = async (assetName) => {
+    // Optional: Add a confirmation dialog before deleting
+    if (!window.confirm(`Are you sure you want to delete the asset: ${assetName}?`)) {
+      return;
+    }
+
+    try {
+      // Send DELETE request to the backend endpoint
+      const response = await fetch(`http://localhost:5000/api/assets/${assetName}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // 3. Successfully deleted on the backend, now update the state (optimistic UI update)
+        setAssets(prevAssets => prevAssets.filter(asset => asset.name !== assetName));
+        console.log(`Asset ${assetName} deleted successfully.`);
+      } else {
+        // Handle non-200 responses (e.g., 404 Not Found)
+        const errorData = await response.json();
+        setError(`Failed to delete asset ${assetName}: ${errorData.message || response.statusText}`);
+      }
+    } catch (error) {
+      setError(`Network error during deletion: ${error.message}`);
+    }
+  };
+
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading assets...</div>;
   }
@@ -55,6 +81,12 @@ const AssetList = () => {
                 </div>
               )}
               {!asset.image && <p className="text-gray-500">No image data available.</p>}
+              <button
+                onClick={() => handleDeleteAsset(asset.name)}
+                className="mt-4 w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-150"
+              >
+                Delete Asset
+              </button>
             </div>
           ))}
         </div>

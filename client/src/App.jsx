@@ -54,7 +54,7 @@ function App() {
                             !location.pathname.startsWith('/ans-questions');
 
   return (
-    <div className='flex h-screen bg-gray-900 text-gray-100 overflow-hidden'>
+    <div className='flex min-h-screen bg-gray-900 text-gray-100 overflow-hidden'>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <div className='fixed inset-0 z-0'>

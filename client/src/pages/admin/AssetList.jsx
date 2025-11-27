@@ -28,6 +28,31 @@ const AssetList = () => {
     fetchAssets();
   }, []);
 
+  //
+  const handleDelete = async (assetName) => {
+    if (!window.confirm(`Are you sure you want to delete the asset: ${assetName}?`)) {
+      return; // User cancelled the operation
+    }
+
+    try {
+      // 1. Send DELETE request to the backend
+      const response = await fetch(`${API_BASE_URL}/${assetName}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // 2. Optimistically update the state (remove the asset from the list)
+        setAssets(prevAssets => prevAssets.filter(asset => asset.name !== assetName));
+        console.log(`Asset '${assetName}' deleted successfully.`);
+      } else {
+        const errorData = await response.json();
+        setError(`Failed to delete asset: ${errorData.message || response.statusText}`);
+      }
+    } catch (error) {
+      setError(`Network error during deletion: ${error.message}`);
+    }
+  };
+
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading assets...</div>;
   }
@@ -37,10 +62,10 @@ const AssetList = () => {
   }
 
   return (
-    <div className="p-6 z-10 ">
+    <div className="p-6 z-10 min-h-screen overflow-y-auto">
       <h2 className="text-xl font-semibold mb-4">Game Assets</h2>
       {assets.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
           {assets.map(asset => (
             <div key={asset._id} className="bg-white shadow-md rounded p-4">
               <h3 className="text-lg text-black font-semibold mb-2">{asset.name}</h3>
@@ -55,6 +80,7 @@ const AssetList = () => {
                 </div>
               )}
               {!asset.image && <p className="text-gray-500">No image data available.</p>}
+              
             </div>
           ))}
         </div>

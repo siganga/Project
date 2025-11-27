@@ -13,7 +13,7 @@ function Reports() {
   const navigate = useNavigate();
   const reportContentRef = useRef(null); 
 
-  // 2. RETRIEVE USER NAME FROM REDUX STATE
+  // 
   const userName = useSelector((state) => state.auth.user?.name);
 
   // Destructure of new 'history' array
@@ -28,7 +28,7 @@ function Reports() {
     );
   }
   
-  // CALCULATE PERCENTAGE AND CHECK PASSMARK
+  // calculates percentage and checks passmark
   const percentage = (correct / total) * 100;
   const hasPassed = percentage >= 75;
   
@@ -86,11 +86,11 @@ function Reports() {
       
      
       <div ref={reportContentRef} className="p-6 bg-white shadow-lg rounded-lg text-black">
-          {/* 3. DISPLAY USER'S NAME */}
+          
           <h2 className="text-xl font-semibold mb-2 text-gray-700">
             {userName ? `Name: ${userName}` : 'Guest Report'}
           </h2>
-          {/* END OF USER'S NAME */}
+         
           
         <h1 className="text-3xl font-bold mb-4 border-b pb-2">Lesson Report ({lessonTitle})</h1>
         <p className="text-xl mb-4">
@@ -99,14 +99,14 @@ function Reports() {
             <span role="img" aria-label="party popper"> 🎉</span>
         </p>
         
-        {/* CONDITIONAL PASSMARK MESSAGE */}
-        {hasPassed && (
-            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
-                <p className="font-bold">Congratulations!</p>
-                <p>You have gotten  a score above the passmark(75%) with a score of {percentage.toFixed(0)}%.</p>
-            </div>
-        )}
-        {/* END OF CONDITIONAL PASSMARK MESSAGE */}
+        
+        {hasPassed ? ( <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert"> 
+<p className="font-bold">Congratulations!</p>
+<p>You have gotten  a score above the passmark(75%) with a score of {percentage.toFixed(0)}%.</p>
+</div> ) : ( <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert"> 
+ <p>Your final score is {percentage.toFixed(0)}%. </p> 
+</div> )}
+        {/*  The required passmark is 75%. Keep practicing! */}
         
         <h2 className="text-2xl font-semibold mb-3 border-b pb-1">Question Breakdown</h2>
         <div className="space-y-4">

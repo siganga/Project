@@ -32,7 +32,7 @@ function UserStreak() {
                     // Determines trophy image
                     if (data.streak >= 183) {
                         setTrophyImage(platinumTrophy);
-                    } else if (data.streak >= 0) {
+                    } else if (data.streak >= 91) {
                         setTrophyImage(goldTrophy);
                     } else if (data.streak >= 30) {
                         setTrophyImage(silverTrophy);
